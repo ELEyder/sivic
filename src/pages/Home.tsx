@@ -6,17 +6,19 @@ const Home = () => {
       <section className={styles.home}>
         <Carousel></Carousel>
       </section>
-      <section>
-        <h1>Bienvenidos a SIVIC TB</h1>
-        <p>
-          Una plataforma para la comunicación y atención de casos relacionados
-          al estigma y discriminación de las personas afectadas por TB, así como
-          a la atención en TB y canasta PANTB
-        </p>
+      <section className={styles.welcome}>
+        <div className={styles.container}>
+          <h1>Bienvenidos a SIVIC TB</h1>
+          <p>
+            Una plataforma para la comunicación y atención de casos relacionados
+            al estigma y discriminación de las personas afectadas por TB, así
+            como a la atención en TB y canasta PANTB
+          </p>
+        </div>
       </section>
-      <section>
-        <h1>Nosotros</h1>
-        <div>
+      <section className={styles.about}>
+        <h1 className={styles.titleAbout}>Nosotros</h1>
+        <div className={styles.aboutContainer}>
           <h1>¿Qué es el SIVIC - TB?</h1>
           <p>
             SIVIC - TB es una herramienta de monitoreo comunitario y ciudadano
@@ -39,11 +41,17 @@ const Home = () => {
           </div>
           <img src="./arrow1.png" alt="arrow" />
           <div>
-            <p>Administrador de la plataforma levanta información y deriva para resolución a OAT, según región de intervención. </p>
+            <p>
+              Administrador de la plataforma levanta información y deriva para
+              resolución a OAT, según región de intervención.{" "}
+            </p>
           </div>
           <img src="./arrow2.png" alt="arrow" />
           <div>
-            <p>Monitor comunitario de OAT, inicia proceso de gestión interna y utiliza canales de denuncia.</p>
+            <p>
+              Monitor comunitario de OAT, inicia proceso de gestión interna y
+              utiliza canales de denuncia.
+            </p>
           </div>
         </div>
       </section>
