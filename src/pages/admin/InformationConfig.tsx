@@ -66,7 +66,7 @@ const InformationConfig = () => {
         </div>
         <div>
           <label htmlFor="title">Imagen 1</label>
-          <img src="/logo.png" alt="logo" /> <input type="file" />
+          <img src="./logo.png" alt="logo" /> <input type="file" />
           <p>(1170 x 1170 px)</p>
         </div>
       </section>

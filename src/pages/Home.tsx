@@ -37,11 +37,11 @@ const Home = () => {
           <div>
             <p>Usuario TB reporta a la plataforma</p>
           </div>
-          <img src="/arrow1.png" alt="arrow" />
+          <img src="./arrow1.png" alt="arrow" />
           <div>
             <p>Administrador de la plataforma levanta información y deriva para resolución a OAT, según región de intervención. </p>
           </div>
-          <img src="/arrow2.png" alt="arrow" />
+          <img src="./arrow2.png" alt="arrow" />
           <div>
             <p>Monitor comunitario de OAT, inicia proceso de gestión interna y utiliza canales de denuncia.</p>
           </div>

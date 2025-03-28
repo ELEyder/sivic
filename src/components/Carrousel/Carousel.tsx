@@ -20,7 +20,7 @@ const Carousel = () => {
         COMUNIDAD”
       </h1>
       <img
-        src={`/banners/${images[index]}`}
+        src={`./banners/${images[index]}`}
         alt={`Slide ${index}`}
         className={styles.banner}
       />

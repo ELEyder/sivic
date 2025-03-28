@@ -42,7 +42,7 @@ const HomeConfig = () => {
         </div>
         <div>
           <label htmlFor="title">Imagen 1</label>
-          <img src="/logo.png" alt="" />
+          <img src="./logo.png" alt="" />
           <input type="file" />
           <p>(1170 x 1170 px)</p>
         </div>
@@ -118,7 +118,7 @@ const HomeConfig = () => {
         </div>
         <div>
           <label htmlFor="title">Imagen</label>
-          <img src="/logo.png" alt="" />
+          <img src="./logo.png" alt="" />
           <input type="file" />
           <p>(1170 x 1170 px)</p>
         </div>

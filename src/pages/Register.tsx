@@ -4,6 +4,7 @@ import { Footer } from "../components/UI";
 import styles from "./Home.module.css";
 
 const Register = () => {
+  styles
   return (
     <div>
       <section>
@@ -160,7 +161,7 @@ const Register = () => {
               <input type="radio" name="opcion" value="2" /> No
             </label>
           </div>
-          <img src="/captcha.png" alt="" />
+          <img src="./captcha.png" alt="" />
           <Link to={"/"}>
             <Button>Enviar</Button>
           </Link>

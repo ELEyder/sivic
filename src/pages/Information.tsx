@@ -67,13 +67,13 @@ const Information = () => {
               </ul>
             </div>
           </div>
-          <img src="/info/1.png" alt="foto1" />
+          <img src="./info/1.png" alt="foto1" />
         </div>
       </section>
       <section>
         <h1>¿QUE ES ESTIGMA Y DISCRIMINACIÓN?</h1>
         <div>
-          <img src="/info/2.png" alt="" />
+          <img src="./info/2.png" alt="" />
           <div>
             <p>
               El estigma se refiere a un atributo profundamente desacreditador
@@ -124,7 +124,7 @@ const Information = () => {
             </p>
           </div>
           <div>
-            <img src="/info/3.png" alt="logo" />
+            <img src="./info/3.png" alt="logo" />
             <h3>Seguimiento estrictamente observado DOT:</h3>
             <p>
               Es importante que los pacientes sigan estrictamente su régimen de

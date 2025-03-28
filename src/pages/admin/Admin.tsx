@@ -26,7 +26,7 @@ const Admin = () => {
         <div>
           <h2>Logo de la web</h2>
           <div>
-            <img src="/logo.png" alt="logo" /> <input type="file" /> <p>(80 x 180 px)</p>
+            <img src="./logo.png" alt="logo" /> <input type="file" /> <p>(80 x 180 px)</p>
           </div>
         </div>
 
@@ -34,15 +34,15 @@ const Admin = () => {
           <h2>Carrusel</h2>
           <div>
             <div>
-              <img src="/logo.png" alt="logo" /> <input type="file" />{" "}
+              <img src="./logo.png" alt="logo" /> <input type="file" />{" "}
               <p>(1170 x 2880 px)</p>
             </div>
             <div>
-              <img src="/logo.png" alt="logo" /> <input type="file" />{" "}
+              <img src="./logo.png" alt="logo" /> <input type="file" />{" "}
               <p>(1170 x 2880 px)</p>
             </div>
             <div>
-              <img src="/logo.png" alt="logo" /> <input type="file" />{" "}
+              <img src="./logo.png" alt="logo" /> <input type="file" />{" "}
               <p>(1170 x 2880 px)</p>
             </div>
           </div>
