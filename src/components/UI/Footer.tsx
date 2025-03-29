@@ -1,7 +1,9 @@
+import styles from "./Footer.module.css";
+
 const Footer = () => {
   return (
-    <footer>
-      <div>
+    <footer className={styles.footer}>
+      <div className={styles.icons}>
         <img src="./footer/1.png" alt="logo1" />
         <img src="./footer/2.png" alt="logo2" />
         <img src="./footer/3.png" alt="logo3" />

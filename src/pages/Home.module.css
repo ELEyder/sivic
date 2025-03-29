@@ -36,26 +36,77 @@
 }
 
 .about {
-  width: 100%;
-  height: 660px;
+  max-width: 1100px;
+  margin: auto;
+  padding: 140px 20px 20px 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-
 }
 
+.aboutContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .titleAbout {
   color: var(--color1);
   font-size: 36px;
 }
 
-.aboutContainer {
+.aboutDescription {
+  width: 884px;
   background-color: #FF9423;
   color: white;
   padding: 40px 80px 40px 100px;
   flex: 1;
+  text-align: center;
   clip-path: polygon(0 0, 90% 0, 100% 50%, 90% 100%, 0 100%, 10% 50%, 0 0);
   h1 {
     font-size: 36px;
   }
+}
+
+.info {
+  max-width: 1100px;
+  margin: auto;
+  padding: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  align-items: center;
+  justify-content: center;
+  h1{
+    color : var(--color1);
+    font-size: 36px;
+  }
+  h2{
+    font-size: 36px;
+  }
+}
+
+.steps {
+  display: flex;
+  align-items: center;
+}
+
+.step1 {
+  background-color: #D9D9D9;
+  padding: 20px 40px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.step2 {
+  background-color: #EFA61F;
+  padding: 20px 40px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.step3 {
+  background-color: #EF681F;
+  padding: 20px 40px;
+  border-radius: 10px;
+  text-align: center;
 }
