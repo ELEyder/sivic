@@ -36,7 +36,7 @@
 }
 
 .about {
-  max-width: 1100px;
+  max-width: 1000px;
   margin: auto;
   padding: 140px 20px 20px 20px;
   display: flex;
@@ -48,6 +48,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  color: white;
 }
 .titleAbout {
   color: var(--color1);
@@ -55,16 +56,12 @@
 }
 
 .aboutDescription {
-  width: 884px;
   background-color: #FF9423;
   color: white;
   padding: 40px 80px 40px 100px;
   flex: 1;
   text-align: center;
   clip-path: polygon(0 0, 90% 0, 100% 50%, 90% 100%, 0 100%, 10% 50%, 0 0);
-  h1 {
-    font-size: 36px;
-  }
 }
 
 .info {
@@ -76,13 +73,8 @@
   gap: 80px;
   align-items: center;
   justify-content: center;
-  h1{
-    color : var(--color1);
-    font-size: 36px;
-  }
-  h2{
-    font-size: 36px;
-  }
+
+
 }
 
 .steps {

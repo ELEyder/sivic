@@ -10,23 +10,13 @@ const Header = () => {
   return (
     <header className={styles.header}>
       <nav>
-        <ul className={styles.nav}>
-          <li>
+        <div className={styles.nav}>
             <img className={styles.logo} src="./logo.png" alt="logo" />
-          </li>
-          <li>
             <Link to="/">Inicio</Link>
-          </li>
-          <li>
             <Link to="/statistics">Estadística</Link>
-          </li>
-          <li>
             <Link to="/information">Información</Link>
-          </li>
-          <li>
             <Link to="/consult">Consulta</Link>
-          </li>
-        </ul>
+        </div>
       </nav>
       <nav className={styles.nav}>
         <Link to="/login" className={styles.administrador}>

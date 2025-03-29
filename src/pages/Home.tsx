@@ -8,7 +8,7 @@ const Home = () => {
       </section>
       <section className={styles.welcome}>
         <div className={styles.container}>
-          <h1>Bienvenidos a SIVIC TB</h1>
+          <h2>Bienvenidos a SIVIC TB</h2>
           <p>
             Una plataforma para la comunicación y atención de casos relacionados
             al estigma y discriminación de las personas afectadas por TB, así
@@ -20,7 +20,7 @@ const Home = () => {
         <div className={styles.aboutContainer}>
           <h1 className={styles.titleAbout}>Nosotros</h1>
           <div className={styles.aboutDescription}>
-            <h1>¿Qué es el SIVIC - TB?</h1>
+            <h2>¿Qué es el SIVIC - TB?</h2>
             <p>
               SIVIC - TB es una herramienta de monitoreo comunitario y ciudadano
               enfocada en la tuberculosis, que facilita la implementación de

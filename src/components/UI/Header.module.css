@@ -17,10 +17,6 @@
   gap: 30px;
 }
 
-li {
-  list-style: none;
-}
-
 .administrador {
   display: flex;
   align-items: center;

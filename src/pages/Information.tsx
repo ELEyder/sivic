@@ -8,11 +8,11 @@ const Information = () => {
       <section className={styles.home}>
         <Carousel></Carousel>
       </section>
-      <section>
+      <section className={styles.info}>
         <h1>Información</h1>
         <h2>¿QUE ES VIGILANCIA CIUDADANA?</h2>
-        <div>
-          <div>
+        <div className={styles.infoContainer}>
+          <div className={styles.infoTexts}>
             <div>
               <h3>Definición</h3>
               <p>
@@ -67,7 +67,7 @@ const Information = () => {
               </ul>
             </div>
           </div>
-          <img src="./info/1.png" alt="foto1" />
+          <img src="./info/1.png" alt="foto1" className={styles.imgInfo}/>
         </div>
       </section>
       <section>

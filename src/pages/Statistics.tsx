@@ -7,7 +7,7 @@ const Statistics = () => {
       <section className={styles.home}>
         <Carousel></Carousel>
       </section>
-      <section>
+      <section className={styles.stats}>
         <h1>Estadísticas</h1>
         <p>
           Lorem ipsum dolor sit amet consectetur. Faucibus varius nunc varius
@@ -16,9 +16,11 @@ const Statistics = () => {
           ullamcorper sagittis euismod rhoncus eget. Ornare amet ut id risus
           ante. Scelerisque non lectus fames velit elit. Porta.
         </p>
-        <div>Grafico 1</div>
-        <div>Grafico 2</div>
-        <div>Grafico 3</div>
+        <div className={styles.graphs}>
+          <div className={styles.graph}>Grafico 1</div>
+          <div className={styles.graph}>Grafico 2</div>
+          <div className={styles.graph}>Grafico 3</div>
+        </div>
         <h2>Reporte actualizado al 28 de febrero del 2025</h2>
       </section>
     </>
