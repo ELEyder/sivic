@@ -70,11 +70,11 @@ const Information = () => {
           <img src="./info/1.png" alt="foto1" className={styles.imgInfo}/>
         </div>
       </section>
-      <section>
+      <section className={styles.infoDark}>
         <h1>¿QUE ES ESTIGMA Y DISCRIMINACIÓN?</h1>
-        <div>
+        <div className={styles.infoDarkContainer}>
           <img src="./info/2.png" alt="" />
-          <div>
+          <div className={styles.infoDarkText}>
             <p>
               El estigma se refiere a un atributo profundamente desacreditador
               que reduce a un individuo de ser una persona completa a alguien
@@ -91,10 +91,10 @@ const Information = () => {
           </div>
         </div>
       </section>
-      <section>
+      <section className={styles.tb}>
         <h1>¿CÓMO ES EL TRATAMIENTO DE LA TB?</h1>
-        <div>
-          <div>
+        <div className={styles.tbContainer}>
+          <div className={styles.tbText}>
             <p>
               El tratamiento de la tuberculosis es un proceso prolongado,
               implica el uso de medicamentos antibióticos durante un período,
@@ -123,15 +123,20 @@ const Information = () => {
               largos, mayor a 6 meses.
             </p>
           </div>
-          <div>
+          <div className={styles.tbMedia}>
+            <div className={styles.imgContainer}>
             <img src="./info/3.png" alt="logo" />
+            </div>
             <h3>Seguimiento estrictamente observado DOT:</h3>
             <p>
               Es importante que los pacientes sigan estrictamente su régimen de
               tratamiento y se sometan a un seguimiento permanente para
               controlar su progreso y detectar cualquier efecto secundario.
             </p>
+            <div className={styles.btnContainer}>
             <Button>Quiero registrar un caso</Button>
+
+            </div>
           </div>
         </div>
       </section>
