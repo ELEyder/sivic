@@ -1,19 +1,18 @@
 import { Link } from "react-router-dom";
-import Button from "../../components/Buttons/Button";
 import styles from "./Login.module.css";
 
 const Login = () => {
   return (
     <>
       <section className={styles.home}>
-        <div>
+        <form className={styles.form}>
           <h1>BIENVENIDO</h1>
-          <input type="text" />
-          <input type="text" />
-          <Link to={"/admin"}>
-            <Button>INGRESAR</Button>
+          <input type="text" placeholder="Correo" className={styles.input}/>
+          <input type="text" placeholder="Contraseña" className={styles.input}/>
+          <Link to={"/admin"} className={styles.button}>
+            <button className={styles.button}>INGRESAR</button>
           </Link>
-        </div>
+        </form>
       </section>
     </>
   );

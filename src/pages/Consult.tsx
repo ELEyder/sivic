@@ -1,19 +1,20 @@
 import Button from "../components/Buttons/Button";
 import styles from "./Consult.module.css";
+
 const Consult = () => {
   return (
     <>
       <section className={styles.home}>
-        <div>
-          <div>
-            <h1>Consulta</h1>
+        <div className={styles.container}>
+          <div className={styles.title}>
+            <h2>CONSULTA</h2>
           </div>
-          <div>
+          <div className={styles.formContainer}>
             <p>
               Si quiere conocer el estado de su caso registrado, coloque su DNI
               en el siguiente espacio y haga clic en consultar
             </p>
-            <input type="text" /> <Button>Consultar</Button>
+            <input type="text" className={styles.input} /> <Button type={"secondary"}>Consultar</Button>
           </div>
         </div>
       </section>

@@ -1,13 +1,11 @@
 import { Link } from "react-router-dom";
-import Button from "../Buttons/Button";
+import styles from "./AdminHeader.module.css";
 
 const AdminHeader = () => {
   return (
-    <header>
+    <header className={styles.header}>
       <h1>ADMINISTRACIÓN</h1>
-      <Link to={"/"}>
-        <Button>Cerrar Sesión</Button>
-      </Link>
+      <Link to={"/"} className={styles.button}>Cerrar Sesión </Link>
     </header>
   );
 };

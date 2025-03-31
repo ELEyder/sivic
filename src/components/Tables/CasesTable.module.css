@@ -1,0 +1,23 @@
+.tableContainer {
+  padding: 40px;
+}
+
+.filters {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.pages {
+  border: 1px solid #000;
+  padding: 5px 10px;
+}
+
+.searchs {
+  display: flex;
+  gap: 20px;
+}
+
+.input {
+  width: 325px;
+}

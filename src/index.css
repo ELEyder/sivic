@@ -1,5 +1,6 @@
 :root {
   --color1: #F77F00;
+  --color2: #0071F2;
   --text: #353535;
 }
 
@@ -38,4 +39,8 @@ p {
 
 li {
   font-weight: 400;
+}
+
+.ant-picker {
+  margin: 0 !important;
 }

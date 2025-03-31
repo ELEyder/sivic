@@ -1,45 +1,44 @@
 import { useState } from "react";
 import { Table, DatePicker } from "antd";
-import dayjs from "dayjs";
 import { Link } from "react-router-dom";
+import dayjs from "dayjs";
+import styles from "./ContactTable.module.css";
 
 const { RangePicker } = DatePicker;
 
 const data = [
   {
-    key: 1,
+    key: "1",
     dni: "12345678",
     nombre: "Juan Pérez",
-    fecha_registro: "2024-03-20",
-    fecha_resolucion: "2024-03-25",
-    estado: "Resuelto",
-    asignado: "María López",
-    comentario: "Caso cerrado satisfactoriamente",
-    detalles: "Detalles del caso aquí...",
-  },
-  {
-    key: 2,
-    dni: "87654321",
-    nombre: "Ana González",
-    fecha_registro: "2024-03-22",
-    fecha_resolucion: "2024-03-27",
+    fecha_registro: "2024-03-01",
+    fecha_atencion: "2024-03-05",
     estado: "Pendiente",
-    asignado: "Carlos Ramírez",
-    comentario: "En revisión",
-    detalles: "Detalles del caso aquí...",
+    correo: "juan.perez@example.com",
+    mensaje: "Solicito información sobre mi trámite.",
   },
   {
-    key: 3,
+    key: "2",
+    dni: "87654321",
+    nombre: "María López",
+    fecha_registro: "2024-03-02",
+    fecha_atencion: "2024-03-07",
+    estado: "Atendido",
+    correo: "maria.lopez@example.com",
+    mensaje: "Gracias por la atención brindada.",
+  },
+  {
+    key: "3",
     dni: "11223344",
-    nombre: "Pedro Méndez",
-    fecha_registro: "2024-03-23",
-    fecha_resolucion: "2024-03-29",
+    nombre: "Pedro Ramírez",
+    fecha_registro: "2024-03-03",
+    fecha_atencion: "2024-03-08",
     estado: "En proceso",
-    asignado: "Luis Torres",
-    comentario: "Esperando documentos",
-    verMas: true,
+    correo: "pedro.ramirez@example.com",
+    mensaje: "Aún no he recibido respuesta.",
   },
 ];
+
 const ContactTable = () => {
   const [filteredData, setFilteredData] = useState(data);
 
@@ -86,9 +85,23 @@ const ContactTable = () => {
   ];
 
   return (
-    <div style={{ padding: 20 }}>
-      <RangePicker onChange={handleDateFilter} style={{ marginBottom: 16 }} />
-      <Table columns={columns} dataSource={filteredData} />
+    <div className={styles.tableContainer}>
+      <div className={styles.filters}>
+        <div className={styles.pages}>10</div>
+        <div className={styles.searchs}>
+          <label htmlFor="">Buscar:</label>
+          <input type="text" className={styles.input} />
+          <RangePicker
+            onChange={handleDateFilter}
+            style={{ marginBottom: 16 }}
+          />
+        </div>
+      </div>
+      <Table
+        columns={columns}
+        dataSource={filteredData}
+        scroll={{ x: "min-content" }}
+      />
     </div>
   );
 };

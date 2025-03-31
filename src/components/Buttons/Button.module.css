@@ -6,3 +6,12 @@
   border-radius: 20px;
   cursor: pointer;
 }
+
+.buttonSecondary {
+  background-color: var(--color2);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}

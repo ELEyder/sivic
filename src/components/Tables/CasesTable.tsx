@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Table, DatePicker } from "antd";
-import dayjs from "dayjs";
 import { Link } from "react-router-dom";
+import styles from "./CasesTable.module.css";
+import dayjs from "dayjs";
 
 const { RangePicker } = DatePicker;
 
@@ -86,11 +87,23 @@ const CasesTable = () => {
   ];
 
   return (
-    <div style={{ padding: 20 }}>
-      <div>10</div>
-      <div><label htmlFor="">Buscar:</label> <input type="text" /></div>
-      <RangePicker onChange={handleDateFilter} style={{ marginBottom: 16 }} />
-      <Table columns={columns} dataSource={filteredData} />
+    <div className={styles.tableContainer}>
+      <div className={styles.filters}>
+        <div className={styles.pages}>10</div>
+        <div className={styles.searchs}>
+          <label htmlFor="">Buscar:</label>
+          <input type="text" className={styles.input} />
+          <RangePicker
+            onChange={handleDateFilter}
+            style={{ marginBottom: 16 }}
+          />
+        </div>
+      </div>
+      <Table
+        columns={columns}
+        dataSource={filteredData}
+        scroll={{ x: "min-content" }}
+      />
     </div>
   );
 };
