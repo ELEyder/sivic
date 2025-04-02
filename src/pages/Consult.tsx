@@ -1,7 +1,11 @@
+import { useState } from "react";
 import Button from "../components/Buttons/Button";
 import styles from "./Consult.module.css";
+import ConsultModal from "../components/Modals/ConsultModal";
 
 const Consult = () => {
+    const [openModal, setOpenModal] = useState(false);
+  
   return (
     <>
       <section className={styles.home}>
@@ -15,11 +19,13 @@ const Consult = () => {
               en el siguiente espacio y haga clic en consultar
             </p>
             <div className={styles.inputContainer}>
-            <input type="text" className={styles.input} /> <Button type={"secondary"}>Consultar</Button>
+              <input type="text" className={styles.input} />
+              <Button type={"secondary"} onClick={() => setOpenModal(true)}>Consultar</Button>
             </div>
           </div>
         </div>
       </section>
+      <ConsultModal open={openModal} setOpen={setOpenModal}/>
     </>
   );
 };
