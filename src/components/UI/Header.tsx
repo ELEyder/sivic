@@ -6,20 +6,41 @@ import Profile from "../Icons/Profile";
 const Header = () => {
   const location = useLocation();
 
-  console.log(location.pathname);
   return (
     <header className={styles.header}>
       <nav>
         <div className={styles.nav}>
-            <img className={styles.logo} src="./logo.png" alt="logo" />
-            <Link to="/">Inicio</Link>
-            <Link to="/statistics">Estadística</Link>
-            <Link to="/information">Información</Link>
-            <Link to="/consult">Consulta</Link>
+          <img className={styles.logo} src="./logo.png" alt="logo" />
+          <Link
+            to="/"
+            className={location.pathname === "/" ? styles.active : ""}
+          >
+            Inicio
+          </Link>
+          <Link
+            to="/statistics"
+            className={location.pathname === "/statistics" ? styles.active : ""}
+          >
+            Estadística
+          </Link>
+          <Link
+            to="/information"
+            className={
+              location.pathname === "/information" ? styles.active : ""
+            }
+          >
+            Información
+          </Link>
+          <Link
+            to="/consult"
+            className={location.pathname === "/consult" ? styles.active : ""}
+          >
+            Consulta
+          </Link>
         </div>
       </nav>
       <nav className={styles.nav}>
-        <Link to="/login" className={styles.administrador}>
+        <Link to="/login" className={`${styles.administrador} ${location.pathname === "/login" ? styles.active : ""}`}>
           <Profile />
           Administrador
         </Link>

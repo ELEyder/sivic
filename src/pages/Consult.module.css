@@ -31,8 +31,19 @@
 }
 
 .formContainer {
-  padding: 20px;
+  padding: 20px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
+
+.inputContainer {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
 .input {
   border: 1px solid #0586FF;
   padding: 10px;

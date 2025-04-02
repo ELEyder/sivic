@@ -14,7 +14,9 @@ const Consult = () => {
               Si quiere conocer el estado de su caso registrado, coloque su DNI
               en el siguiente espacio y haga clic en consultar
             </p>
+            <div className={styles.inputContainer}>
             <input type="text" className={styles.input} /> <Button type={"secondary"}>Consultar</Button>
+            </div>
           </div>
         </div>
       </section>
