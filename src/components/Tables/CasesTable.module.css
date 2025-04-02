@@ -21,3 +21,18 @@
 .input {
   width: 325px;
 }
+.rowLight td {
+  background-color: #E8E8E8; 
+}
+
+.rowLight:hover td {
+  background-color: #E8E8E8 !important;
+}
+
+.rowDark td {
+  background-color: white;
+}
+
+.rowDark:hover td {
+  background-color: white !important;
+}

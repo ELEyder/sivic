@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Table, DatePicker } from "antd";
-import { Link } from "react-router-dom";
 import styles from "./CasesTable.module.css";
 import dayjs from "dayjs";
+import CaseModal from "../Modals/CaseModal";
 
 const { RangePicker } = DatePicker;
 
@@ -43,13 +43,14 @@ const data = [
 ];
 const CasesTable = () => {
   const [filteredData, setFilteredData] = useState(data);
+  const [openModal, setOpenModal] = useState(false);
 
   const handleDateFilter = (dates: (dayjs.Dayjs | null)[] | null) => {
     if (!dates) {
       setFilteredData(data);
       return;
     }
-
+    
     const [start, end] = dates as [dayjs.Dayjs, dayjs.Dayjs];
 
     const filtered = data.filter(
@@ -60,6 +61,11 @@ const CasesTable = () => {
 
     setFilteredData(filtered);
   };
+
+  const viewMore = (record : any) => {
+    console.log(record)
+    setOpenModal(true)
+  }
 
   const columns = [
     { title: "DNI", dataIndex: "dni", key: "dni" },
@@ -81,12 +87,13 @@ const CasesTable = () => {
       title: "DETALLES",
       key: "detalles",
       render: (_: any, record: any) => (
-        <Link to={`link/${record.dni}`}>Ver más</Link>
+        <a onClick={() => viewMore(record)}>Ver más</a>
       ),
     },
   ];
 
   return (
+    <>
     <div className={styles.tableContainer}>
       <div className={styles.filters}>
         <div className={styles.pages}>10</div>
@@ -100,11 +107,15 @@ const CasesTable = () => {
         </div>
       </div>
       <Table
+        bordered
         columns={columns}
         dataSource={filteredData}
         scroll={{ x: "min-content" }}
+        rowClassName={(_, index) => (index % 2 === 0 ? styles.rowLight : styles.rowDark)}
       />
     </div>
+    <CaseModal open={openModal} setOpen={setOpenModal}/>
+    </>
   );
 };
 

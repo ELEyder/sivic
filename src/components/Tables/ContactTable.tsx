@@ -98,9 +98,11 @@ const ContactTable = () => {
         </div>
       </div>
       <Table
+        bordered
         columns={columns}
         dataSource={filteredData}
         scroll={{ x: "min-content" }}
+        rowClassName={(_, index) => (index % 2 === 0 ? styles.rowLight : styles.rowDark)}
       />
     </div>
   );
