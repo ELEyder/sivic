@@ -2,7 +2,7 @@ import { Button, Input, Select } from "antd";
 import DefaultModal from "./DefaultModal";
 import { useState } from "react";
 
-const CaseModal = ({ open, setOpen }: any) => {
+const CaseModal = ({ open }: any) => {
   const [estado, setEstado] = useState("");
   const [oat, setOat] = useState("");
 
