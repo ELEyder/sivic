@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import Button from "../components/Buttons/Button";
 import { Footer } from "../components/UI";
 import styles from "./Register.module.css";
