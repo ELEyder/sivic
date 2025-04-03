@@ -3,6 +3,7 @@ import { Table, DatePicker } from "antd";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 import styles from "./ContactTable.module.css";
+import ContactModal from "../Modals/ContactModal";
 
 const { RangePicker } = DatePicker;
 
@@ -41,6 +42,7 @@ const data = [
 
 const ContactTable = () => {
   const [filteredData, setFilteredData] = useState(data);
+  const [openModal, setOpenModal] = useState(false);
 
   const handleDateFilter = (dates: (dayjs.Dayjs | null)[] | null) => {
     if (!dates) {
@@ -58,6 +60,11 @@ const ContactTable = () => {
 
     setFilteredData(filtered);
   };
+
+  const viewMore = (record : any) => {
+    console.log(record)
+    setOpenModal(true)
+  }
 
   const columns = [
     { title: "DNI", dataIndex: "dni", key: "dni" },
@@ -79,12 +86,13 @@ const ContactTable = () => {
       title: "DETALLES",
       key: "detalles",
       render: (_: any, record: any) => (
-        <Link to={`link/${record.dni}`}>Ver más</Link>
+        <a onClick={() => viewMore(record)}>Ver más</a>
       ),
     },
   ];
 
   return (
+    <>
     <div className={styles.tableContainer}>
       <div className={styles.filters}>
         <div className={styles.pages}>10</div>
@@ -105,6 +113,8 @@ const ContactTable = () => {
         rowClassName={(_, index) => (index % 2 === 0 ? styles.rowLight : styles.rowDark)}
       />
     </div>
+    <ContactModal open={openModal} setOpen={setOpenModal}/>
+    </>
   );
 };
 

@@ -243,7 +243,7 @@ const Register = () => {
       </div>
       <Footer />
 
-      <DefaultModal open={openModal} width={"628px"}>
+      <DefaultModal open={openModal} setOpen={setOpenModal} width={"628px"}>
         <div className={styles.modalContainer}>
           <Check />
           <h1>¡Felicidades el registro fue enviado con éxito!</h1>

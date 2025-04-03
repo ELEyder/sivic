@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Table, DatePicker } from "antd";
+import { Table, DatePicker, Button } from "antd";
 import styles from "./CasesTable.module.css";
 import dayjs from "dayjs";
 import CaseModal from "../Modals/CaseModal";
@@ -113,7 +113,7 @@ const CasesTable = () => {
         scroll={{ x: "min-content" }}
         rowClassName={(_, index) => (index % 2 === 0 ? styles.rowLight : styles.rowDark)}
       />
-    </div>
+    </div><Button>Exportar</Button>
     <CaseModal open={openModal} setOpen={setOpenModal}/>
     </>
   );

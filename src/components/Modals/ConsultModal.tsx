@@ -74,7 +74,7 @@ const data = [
 
 const ConsultModal = ({ open, setOpen }: any) => {
   return (
-    <DefaultModal open={open}>
+    <DefaultModal open={open} setOpen={setOpen}>
       <div style={{display: "flex", flexDirection: "column", alignItems: "end", gap: "10px"}}>
       <h3 style={{width: "100%", textAlign: "center"}}>RESULTADOS</h3>
       <Table columns={columns} dataSource={data} pagination={false} />
