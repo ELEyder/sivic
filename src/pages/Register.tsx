@@ -7,6 +7,7 @@ import Check from "../components/Icons/Check";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ButtonModal from "../components/Buttons/ButtonModal";
+import ArrowRight from "../components/Icons/ArrowRight";
 
 const Register = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -24,6 +25,9 @@ const Register = () => {
         </section>
 
         <section className={styles.content}>
+          <a className={styles.regresar} onClick={() => navigate("/")}>
+            <ArrowRight />
+          </a>
           <div className={styles.info}>
             <p>
               SIVICTB protegerá sus datos personales y respetará el derecho a la
@@ -251,7 +255,10 @@ const Register = () => {
             <ButtonModal type={"secondary"} onClick={() => setOpenModal(false)}>
               Completar nuevo formulario
             </ButtonModal>
-            <ButtonModal onClick={() => navigate("/")}>
+            <ButtonModal onClick={() => {
+              navigate("/")
+              window.scrollTo(0, 0);
+            }}>
               Volver a la página web
             </ButtonModal>
           </div>

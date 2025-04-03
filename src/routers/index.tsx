@@ -11,6 +11,7 @@ import AdminLayout from "../layouts/AdminLayout";
 import StatisticsConfig from "../pages/admin/StatisticsConfig";
 import HomeConfig from "../pages/admin/HomeConfig";
 import Register from "../pages/Register";
+import Contact from "../pages/Contact";
 
 const Routers = () => {
   return (
@@ -22,6 +23,7 @@ const Routers = () => {
           <Route path={"/information"} element={<Information />} />
           <Route path={"/consult"} element={<Consult />} />
           <Route path={"/login"} element={<Login />} />
+          <Route path={"/contact"} element={<Contact />} />
         </Route>
         <Route element={<AdminLayout />}>
           <Route path={"/admin"} element={<Admin />} />

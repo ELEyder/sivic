@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Table, DatePicker } from "antd";
-import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 import styles from "./ContactTable.module.css";
 import ContactModal from "../Modals/ContactModal";
