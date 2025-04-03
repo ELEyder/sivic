@@ -1,0 +1,22 @@
+
+.modalContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 20px;
+  margin: 20px;
+}
+
+.modalContainer h1{
+  font-size: 40px;
+  font-weight: 550;
+  color: #727272;
+}
+
+.modalFooter {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
