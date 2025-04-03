@@ -1,13 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/Buttons/Button";
-import styles from "./InformationConfig.module.css";
+import styles from "./MainConfig.module.css";
 import SelectFile from "../../components/SelectFile/SelectFile";
+import { Input } from "antd";
 
 const InformationConfig = () => {
   const navigate = useNavigate();
 
   return (
-    <div className={styles.infoConfig}>
+    <div className={styles.mainConfig}>
       <h1>Información</h1>
       <section className={styles.container}>
         <div className={styles.inputContainer}>
@@ -24,7 +25,10 @@ const InformationConfig = () => {
         </div>
         <div className={styles.inputContainer}>
           <label htmlFor="title">Descripción</label>
-          <input type="text" />
+          <Input.TextArea
+            rows={4}
+            placeholder="Escribe aquí..."
+          />
         </div>
         <div className={styles.inputContainer}>
           <label htmlFor="title">Subtitulo de texto</label>
@@ -32,7 +36,10 @@ const InformationConfig = () => {
         </div>
         <div className={styles.inputContainer}>
           <label htmlFor="title">Descripción</label>
-          <input type="text" />
+          <Input.TextArea
+            rows={4}
+            placeholder="Escribe aquí..."
+          />
         </div>
         <div className={styles.inputContainer}>
           <label htmlFor="title">Subtitulo de texto</label>
@@ -40,7 +47,10 @@ const InformationConfig = () => {
         </div>
         <div className={styles.inputContainer}>
           <label htmlFor="title">Descripción</label>
-          <input type="text" />
+          <Input.TextArea
+            rows={4}
+            placeholder="Escribe aquí..."
+          />
         </div>
         <div className={styles.inputContainer}>
           <label htmlFor="title">Imagen 1</label>
@@ -61,7 +71,10 @@ const InformationConfig = () => {
         </div>
         <div className={styles.inputContainer}>
           <label htmlFor="title">Descripción</label>
-          <input type="text" />
+          <Input.TextArea
+            rows={4}
+            placeholder="Escribe aquí..."
+          />
         </div>
       </section>
       <section className={styles.container}>
@@ -71,7 +84,10 @@ const InformationConfig = () => {
         </div>
         <div className={styles.inputContainer}>
           <label htmlFor="title">Descripción</label>
-          <input type="text" />
+          <Input.TextArea
+            rows={4}
+            placeholder="Escribe aquí..."
+          />
         </div>
         <div className={styles.inputContainer}>
           <label htmlFor="title">Subtitulo 1</label>
@@ -79,7 +95,10 @@ const InformationConfig = () => {
         </div>
         <div className={styles.inputContainer}>
           <label htmlFor="title">Descripción</label>
-          <input type="text" />
+          <Input.TextArea
+            rows={4}
+            placeholder="Escribe aquí..."
+          />
         </div>
         <div className={styles.inputContainer}>
           <label htmlFor="title">Subtitulo 2</label>
@@ -87,7 +106,10 @@ const InformationConfig = () => {
         </div>
         <div className={styles.inputContainer}>
           <label htmlFor="title">Descripción</label>
-          <input type="text" />
+          <Input.TextArea
+            rows={4}
+            placeholder="Escribe aquí..."
+          />
         </div>
         <div className={styles.inputContainer}>
           <label htmlFor="title">Subtitulo 3</label>
@@ -95,7 +117,10 @@ const InformationConfig = () => {
         </div>
         <div className={styles.inputContainer}>
           <label htmlFor="title">Descripción</label>
-          <input type="text" />
+          <Input.TextArea
+            rows={4}
+            placeholder="Escribe aquí..."
+          />
         </div>
       </section>
       <section className={styles.container}>
@@ -109,7 +134,10 @@ const InformationConfig = () => {
         </div>
         <div className={styles.inputContainer}>
           <label htmlFor="title">Descripción</label>
-          <input type="text" />
+          <Input.TextArea
+            rows={4}
+            placeholder="Escribe aquí..."
+          />
         </div>
         <div className={styles.inputContainer}>
           <label htmlFor="title">Subtitulo del texto</label>
@@ -117,7 +145,10 @@ const InformationConfig = () => {
         </div>
         <div className={styles.inputContainer}>
           <label htmlFor="title">Descripción</label>
-          <input type="text" />
+          <Input.TextArea
+            rows={4}
+            placeholder="Escribe aquí..."
+          />
         </div>
         <div className={styles.inputContainer}>
           <label htmlFor="title">Imagen</label>

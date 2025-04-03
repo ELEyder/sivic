@@ -1,13 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/Buttons/Button";
-import styles from "./HomeConfig.module.css";
+import styles from "./MainConfig.module.css";
 import SelectFile from "../../components/SelectFile/SelectFile";
+import { Input } from "antd";
 
 const HomeConfig = () => {
   const navigate = useNavigate();
 
   return (
-    <div className={styles.homeConfig}>
+    <div className={styles.mainConfig}>
       <h1>Inicio</h1>
       <section className={styles.container}>
         <div className={styles.inputContainer}>
@@ -30,7 +31,10 @@ const HomeConfig = () => {
         </div>
         <div className={styles.inputContainer}>
           <label htmlFor="title">Descripción</label>
-          <input type="text" />
+          <Input.TextArea
+            rows={4}
+            placeholder="Escribe aquí..."
+          />
         </div>
         <div className={styles.inputContainer}>
           <label htmlFor="title">Subtitulo 2</label>
@@ -38,7 +42,10 @@ const HomeConfig = () => {
         </div>
         <div className={styles.inputContainer}>
           <label htmlFor="title">Descripción</label>
-          <input type="text" />
+          <Input.TextArea
+            rows={4}
+            placeholder="Escribe aquí..."
+          />
         </div>
       </section>
       <section className={styles.container}>
@@ -56,7 +63,10 @@ const HomeConfig = () => {
         </div>
         <div className={styles.inputContainer}>
           <label htmlFor="title">Descripción</label>
-          <input type="text" />
+          <Input.TextArea
+            rows={4}
+            placeholder="Escribe aquí..."
+          />
         </div>
         <div className={styles.inputContainer}>
           <label htmlFor="title">Subtitulo 2</label>
@@ -64,12 +74,15 @@ const HomeConfig = () => {
         </div>
         <div className={styles.inputContainer}>
           <label htmlFor="title">Descripción</label>
-          <input type="text" />
+          <Input.TextArea
+            rows={4}
+            placeholder="Escribe aquí..."
+          />
         </div>
         <div className={styles.inputContainer}>
           <label htmlFor="title">Imagen 1</label>
           <div className={styles.imageContainer}>
-            <img src="./info/1.png" alt="logo"/> <SelectFile />
+            <img src="./info/1.png" alt="logo" /> <SelectFile />
             <p>(1170 x 1170 px)</p>
           </div>
         </div>

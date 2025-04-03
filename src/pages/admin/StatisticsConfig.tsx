@@ -1,12 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/Buttons/Button";
-import styles from "./StatisticsConfig.module.css";
+import styles from "./MainConfig.module.css";
+import { Input } from "antd";
 
 const StatisticsConfig = () => {
   const navigate = useNavigate();
 
   return (
-    <div className={styles.statsConfig}>
+    <div className={styles.mainConfig}>
       <h1>Estadisticas</h1>
       <section className={styles.container}>
         <div className={styles.inputContainer}>
@@ -15,7 +16,10 @@ const StatisticsConfig = () => {
         </div>
         <div className={styles.inputContainer}>
           <label htmlFor="title">Descripción</label>
-          <input type="text" />
+          <Input.TextArea
+            rows={4}
+            placeholder="Escribe aquí..."
+          />
         </div>
       </section>
       <div className={styles.options}>
