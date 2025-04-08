@@ -21,10 +21,25 @@ const useCaso = () => {
   };
 
   
-  const createCaso = async (data : {}) => {
+  const createCaso = async (data : any) => {
     setLoading(true);
     try {
       const response = await ApiClient.post(`/casos`, data);
+      console.log(response.data);
+      setCasos(response.data);
+    } catch (error: any) {
+      console.log(error.response.data.message);
+      setError(error);
+
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const updateCaso = async (id:number, data : any) => {
+    setLoading(true);
+    try {
+      const response = await ApiClient.put(`/casos/${id}`, data);
       console.log(response.data);
       setCasos(response.data);
     } catch (error: any) {
@@ -44,7 +59,7 @@ const useCaso = () => {
     fetch();
   }, []);
 
-  return { casos, loading, error, getCasos, createCaso };
+  return { casos, loading, error, getCasos, createCaso, updateCaso };
 };
 
 export default useCaso;

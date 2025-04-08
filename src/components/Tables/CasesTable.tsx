@@ -11,12 +11,18 @@ import { Estado } from "../../interfaces/Estado";
 const { RangePicker } = DatePicker;
 
 const CasesTable = () => {
-  const { casos, loading } = useCaso();
+  const { casos, loading, getCasos } = useCaso();
   const [page, setPage] = useState(10);
-  const [searchTerm, setSearchTerm] = useState(""); // Estado para la búsqueda
+  const [searchTerm, setSearchTerm] = useState("");
   const [filteredData, setFilteredData] = useState(casos);
   const [openModal, setOpenModal] = useState(false);
   const [casoSelected, setCasoSelected] = useState({} as Caso);
+
+  useEffect(() => {
+    if (!openModal) {
+      getCasos();
+    }
+  }, [openModal]);
 
   useEffect(() => {
     setFilteredData(casos);
@@ -94,11 +100,11 @@ const CasesTable = () => {
         style: {
           background:
             record.estado.nombre === "Recibido"
-              ? "#FF9A27"
-              : record.estado.nombre === "Atendido"
+              ? "#FF0D0D"
+              : record.estado.nombre === "Resuelto"
               ? "#5FE04E"
               : "#D6E04E",
-          color: "black",
+          color: record.estado.nombre === "Recibido" ? "white" : "black",
         },
       }),
     },

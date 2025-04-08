@@ -1,9 +1,11 @@
-import { Button, Input, Select } from "antd";
+import { Button, Input } from "antd";
 import DefaultModal from "./DefaultModal";
 import { useEffect, useState } from "react";
 import SelectFile from "../SelectFile/SelectFile";
 import { Caso } from "../../interfaces/Caso";
 import styles from "./CaseModal.module.css";
+import useCaso from "../../hooks/useCaso";
+
 interface CaseModalProps {
   caso: Caso;
   open: boolean;
@@ -11,14 +13,26 @@ interface CaseModalProps {
 }
 
 const CaseModal: React.FC<CaseModalProps> = ({ caso, open, setOpen }) => {
+  const { updateCaso } = useCaso();
   const [estado, setEstado] = useState<number>(caso.estado?.id);
   const [oat, setOat] = useState<string | null>(caso.asignado || null);
+  const [resolucion, setResolucion] = useState<string | null>(caso.resolucion || null);
 
   useEffect(() => {
     setEstado(caso.estado?.id);
     setOat(caso.asignado || null);
+    setResolucion(caso.resolucion || null);
   }, [caso]);
-  
+
+  const onSubmit = async (e: any) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData.entries());
+    console.log(data);
+    await updateCaso(caso.id, data);
+    setOpen(false);
+  };
+
   return (
     <DefaultModal open={open} setOpen={setOpen} width={"600px"}>
       <div className={styles.container}>
@@ -73,56 +87,66 @@ const CaseModal: React.FC<CaseModalProps> = ({ caso, open, setOpen }) => {
           </p>
           <p>{caso.autorizacion_copia_reporte ? "Sí" : "No"}</p>
         </div>
-
-        <p>
-          <strong>Estado</strong>
-        </p>
-        <Select
-          style={{ width: "100%" }}
-          value={estado}
-          onChange={setEstado}
-          placeholder="Seleccione"
-        >
-          <Select.Option value={1}>Recibido</Select.Option>
-          <Select.Option value={2}>Atendido</Select.Option>
-          <Select.Option value={3}>Resuelto</Select.Option>
-        </Select>
-        <p>
-          <strong>Asignar a la OAT</strong>
-        </p>
-        <Select
-          style={{ width: "100%" }}
-          value={oat || undefined}
-          onChange={setOat}
-          placeholder="Seleccione"
-        >
-          <Select.Option value="oat1">OAT CEVMT</Select.Option>
-          <Select.Option value="oat2">OAT ASAT LV</Select.Option>
-          <Select.Option value="oat3">OAT ASET</Select.Option>
-        </Select>
-        <p>
-          <strong>Resolución</strong>
-        </p>
-        <Input.TextArea rows={3} />
-        <p>
-          <strong>Subir archivo (Resolución)</strong>
-        </p>
-        <div>
-          <SelectFile /> <p>(Máximo 5 MB, PDF o JPG)</p>
-        </div>
-        <div style={{ marginTop: 20, textAlign: "center" }}>
-          <Button
-            type="primary"
-            style={{ marginRight: 10 }}
-            onClick={() => setOpen(false)}
+        <form onSubmit={onSubmit}>
+          <p>
+            <strong>Estado</strong>
+          </p>
+          <select
+            name="estado_id"
+            value={estado}
+            onChange={(e) => setEstado(Number(e.target.value))}
           >
-            Cancelar
-          </Button>
-          <Button type="primary" style={{ marginRight: 10 }}>
-            Registrar
-          </Button>
-          <Button type="primary">Enviar resolución</Button>
-        </div>
+            <option value={1}>Recibido</option>
+            <option value={3}>Atendido</option>
+            <option value={4}>Resuelto</option>
+          </select>
+
+          <p>
+            <strong>Asignar a la OAT</strong>
+          </p>
+          <select
+            name="asignado"
+            value={oat || undefined}
+            onChange={(e) => setOat(e.target.value)}
+          >
+            <option value="">Seleccione</option>
+            <option value="OAT CEVMT">OAT CEVMT</option>
+            <option value="OAT ASAT LV">OAT ASAT LV</option>
+            <option value="OAT ASET">OAT ASET</option>
+          </select>
+          <p>
+            <strong>Resolución</strong>
+          </p>
+          <textarea
+            rows={3}
+            style={{ width: "100%", padding: "8px", fontFamily: "inherit" }}
+            value={resolucion || ""}
+            onChange={(e) => setResolucion(e.target.value)}
+            name="resolucion"
+          />
+          <p>
+            <strong>Subir archivo (Resolución)</strong>
+          </p>
+          <div>
+            <SelectFile /> <p>(Máximo 5 MB, PDF o JPG)</p>
+          </div>
+          <div style={{ marginTop: 20, textAlign: "center" }}>
+            <Button
+              type="primary"
+              style={{ marginRight: 10 }}
+              onClick={() => setOpen(false)}
+            >
+              Cancelar
+            </Button>
+            <Button
+              type="primary"
+              htmlType="submit"
+              style={{ marginRight: 10 }}
+            >
+              Registrar
+            </Button>
+          </div>
+        </form>
       </div>
     </DefaultModal>
   );
