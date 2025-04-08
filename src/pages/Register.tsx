@@ -19,7 +19,7 @@ const Register = () => {
   const [openModal, setOpenModal] = useState(false);
   const navigate = useNavigate();
 
-  const handleTipoChange = (e : any) => {
+  const handleTipoChange = (e: any) => {
     const valor = e.target.value;
     setTipoNacionalidad(valor);
 
@@ -30,16 +30,16 @@ const Register = () => {
     }
   };
 
-  const handleNacionalidadChange = (e : any) => {
+  const handleNacionalidadChange = (e: any) => {
     setNacionalidad(e.target.value);
   };
 
   const onSubmit = (e: any) => {
     e.preventDefault();
-    // if (!captchaValue) {
-    //   alert("Por favor, completa el captcha.");
-    //   return;
-    // }
+    if (!captchaValue) {
+     alert("Por favor, completa el captcha.");
+      return;
+    }
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
     data.lugar_caso = `${data.lugar_caso} - "${data.nombre_lugar_caso}"`;
@@ -79,7 +79,14 @@ const Register = () => {
 
             <div>
               <label htmlFor="">DNI</label>
-              <input type="text" name="dni" required />
+              <input
+                type="text"
+                name="dni"
+                required
+                pattern="^\d{8}$"
+                title="El DNI debe tener exactamente 8 números"
+                maxLength={8}
+              />
             </div>
 
             <div className={styles.select}>
@@ -127,12 +134,23 @@ const Register = () => {
 
             <div>
               <label htmlFor="">Teléfono fijo o celular</label>
-              <input type="text" name="telefono" required />
+              <input
+                type="text"
+                name="telefono"
+                required
+                pattern="^\d+$"
+                title="El teléfono debe contener solo números"
+              />
             </div>
 
             <div>
               <label htmlFor="">Correo electrónico</label>
-              <input type="text" name="correo" required />
+              <input
+                type="email"
+                name="correo"
+                required
+                title="Por favor, ingresa un correo electrónico válido"
+              />
             </div>
 
             <div className={styles.select}>
@@ -178,7 +196,13 @@ const Register = () => {
 
             <div>
               <label htmlFor="">Dirección</label>
-              <input type="text" name="direccion" required />
+              <input
+                type="text"
+                name="direccion"
+                required
+                pattern="^[a-zA-Z0-9\s,.\-]+$"
+                title="La dirección solo puede contener letras, números, comas, puntos y guiones"
+              />
             </div>
 
             <div className={styles.row}>
@@ -245,25 +269,45 @@ const Register = () => {
               </div>
               <div className={styles.option}>
                 <div>
-                  <input type="radio" name="lugar_caso" value="Hospital" required />
+                  <input
+                    type="radio"
+                    name="lugar_caso"
+                    value="Hospital"
+                    required
+                  />
                 </div>
                 <label>Hospital</label>
               </div>
               <div className={styles.option}>
                 <div>
-                  <input type="radio" name="lugar_caso" value="Centro" required />
+                  <input
+                    type="radio"
+                    name="lugar_caso"
+                    value="Centro"
+                    required
+                  />
                 </div>
                 <label>Centro de Estudios</label>
               </div>
               <div className={styles.option}>
                 <div>
-                  <input type="radio" name="lugar_caso" value="Trabajo" required />
+                  <input
+                    type="radio"
+                    name="lugar_caso"
+                    value="Trabajo"
+                    required
+                  />
                 </div>
                 <label>Trabajo</label>
               </div>
               <div className={styles.option}>
                 <div>
-                  <input type="radio" name="lugar_caso" value="Comunidad" required />
+                  <input
+                    type="radio"
+                    name="lugar_caso"
+                    value="Comunidad"
+                    required
+                  />
                 </div>
                 <label>Comunidad</label>
               </div>
@@ -284,7 +328,13 @@ const Register = () => {
 
             <div>
               <label htmlFor="">Describa brevemente el caso </label>
-              <input type="text" name="descripcion" required />
+              <input
+                type="text"
+                name="descripcion"
+                required
+                minLength={10}
+                title="La descripción debe tener al menos 10 caracteres"
+              />
             </div>
 
             <div className={styles.select}>
@@ -345,7 +395,7 @@ const Register = () => {
             </div>
             <div>
               <ReCAPTCHA
-                sitekey="TU_SITE_KEY_DE_RECAPTCHA"
+                sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY || ""}
                 onChange={(value) => setCaptchaValue(value)}
               />
             </div>

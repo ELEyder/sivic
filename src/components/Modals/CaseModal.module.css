@@ -1,0 +1,33 @@
+.container {
+  padding: 0px 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.container h2 {
+  width: 100%;
+  text-align: center;
+}
+
+.personalDataContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.personalDataContainer .labels {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.personalDataContainer .data {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.caso {
+  display: flex;
+  flex-direction: column;
+}

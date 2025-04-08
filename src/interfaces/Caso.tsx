@@ -1,4 +1,5 @@
 import { Estado } from "./Estado";
+import { TipoCaso } from "./TipoCaso";
 
 export interface Caso {
   id: number;
@@ -11,7 +12,7 @@ export interface Caso {
   departamento: string;
   provincia: string;
   distrito: string;
-  tipo_denuncia: string;
+  tipo_caso: TipoCaso;
   lugar_caso: string;
   descripcion: string;
   autorizacion_comunicacion: boolean;

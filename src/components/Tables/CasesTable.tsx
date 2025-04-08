@@ -16,6 +16,7 @@ const CasesTable = () => {
   const [searchTerm, setSearchTerm] = useState(""); // Estado para la búsqueda
   const [filteredData, setFilteredData] = useState(casos);
   const [openModal, setOpenModal] = useState(false);
+  const [casoSelected, setCasoSelected] = useState({} as Caso);
 
   useEffect(() => {
     setFilteredData(casos);
@@ -55,8 +56,9 @@ const CasesTable = () => {
     setFilteredData(filtered);
   };
 
-  const viewMore = (record: any) => {
-    console.log(record);
+  const viewMore = (record: Caso) => {
+    setCasoSelected(record);
+    console.log("Caso seleccionado:", record);
     setOpenModal(true);
   };
 
@@ -161,7 +163,7 @@ const CasesTable = () => {
         />
       </div>
       <Button>Exportar</Button>
-      <CaseModal open={openModal} setOpen={setOpenModal} />
+      <CaseModal caso={casoSelected} open={openModal} setOpen={setOpenModal} />
     </>
   );
 };
