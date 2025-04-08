@@ -1,59 +1,36 @@
-import { useState } from "react";
-import { Table, DatePicker, Button } from "antd";
+import { useEffect, useState } from "react";
+import { Table, DatePicker, Button, Select } from "antd";
 import styles from "./CasesTable.module.css";
 import dayjs from "dayjs";
 import CaseModal from "../Modals/CaseModal";
+import useCaso from "../../hooks/useCaso";
+import type { ColumnsType } from "antd/es/table";
+import { Caso } from "../../interfaces/Caso";
+import { Estado } from "../../interfaces/Estado";
 
 const { RangePicker } = DatePicker;
 
-const data = [
-  {
-    key: 1,
-    dni: "12345678",
-    nombre: "Juan Pérez",
-    fecha_registro: "2024-03-20",
-    fecha_resolucion: "2024-03-25",
-    estado: "Resuelto",
-    asignado: "María López",
-    comentario: "Caso cerrado satisfactoriamente",
-    detalles: "Detalles del caso aquí...",
-  },
-  {
-    key: 2,
-    dni: "87654321",
-    nombre: "Ana González",
-    fecha_registro: "2024-03-22",
-    fecha_resolucion: "2024-03-27",
-    estado: "Pendiente",
-    asignado: "Carlos Ramírez",
-    comentario: "En revisión",
-    detalles: "Detalles del caso aquí...",
-  },
-  {
-    key: 3,
-    dni: "11223344",
-    nombre: "Pedro Méndez",
-    fecha_registro: "2024-03-23",
-    fecha_resolucion: "2024-03-29",
-    estado: "En proceso",
-    asignado: "Luis Torres",
-    comentario: "Esperando documentos",
-    verMas: true,
-  },
-];
 const CasesTable = () => {
-  const [filteredData, setFilteredData] = useState(data);
+  const { casos, loading } = useCaso();
+  const [page, setPage] = useState(10);
+  const [searchTerm, setSearchTerm] = useState(""); // Estado para la búsqueda
+  const [filteredData, setFilteredData] = useState(casos);
   const [openModal, setOpenModal] = useState(false);
 
+  useEffect(() => {
+    setFilteredData(casos);
+  }, [casos]);
+
+  // Filtrado por fecha
   const handleDateFilter = (dates: (dayjs.Dayjs | null)[] | null) => {
     if (!dates) {
-      setFilteredData(data);
+      setFilteredData(casos);
       return;
     }
-    
+
     const [start, end] = dates as [dayjs.Dayjs, dayjs.Dayjs];
 
-    const filtered = data.filter(
+    const filtered = casos.filter(
       (item) =>
         item.fecha_registro >= start.format("YYYY-MM-DD") &&
         item.fecha_registro <= end.format("YYYY-MM-DD")
@@ -62,59 +39,129 @@ const CasesTable = () => {
     setFilteredData(filtered);
   };
 
-  const viewMore = (record : any) => {
-    console.log(record)
-    setOpenModal(true)
-  }
+  // Filtrado por búsqueda
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.toLowerCase();
+    setSearchTerm(value);
 
-  const columns = [
-    { title: "DNI", dataIndex: "dni", key: "dni" },
-    { title: "NOMBRE", dataIndex: "nombre", key: "nombre" },
+    const filtered = casos.filter(
+      (item) =>
+        item.nombre_completo.toLowerCase().includes(value) ||
+        item.dni.includes(value) ||
+        item.estado.nombre.toLowerCase().includes(value) ||
+        item.asignado?.toLowerCase().includes(value)
+    );
+
+    setFilteredData(filtered);
+  };
+
+  const viewMore = (record: any) => {
+    console.log(record);
+    setOpenModal(true);
+  };
+
+  const columns: ColumnsType<Caso> = [
+    { title: "DNI", dataIndex: "dni", key: "dni", align: "center" },
+    {
+      title: "NOMBRE COMPLETO",
+      dataIndex: "nombre_completo",
+      key: "nombre",
+      align: "center" as const,
+    },
     {
       title: "REGISTRO DE CASO",
-      dataIndex: "fecha_registro",
+      dataIndex: "created_at",
       key: "fecha_registro",
+      align: "center" as const,
+      render: (text: string | null) => text || "—",
     },
     {
       title: "FECHA DE RESOLUCIÓN",
       dataIndex: "fecha_resolucion",
       key: "fecha_resolucion",
+      align: "center" as const,
+      render: (text: string | null) => text || "—",
     },
-    { title: "ESTADO", dataIndex: "estado", key: "estado" },
-    { title: "ASIGNADO", dataIndex: "asignado", key: "asignado" },
-    { title: "COMENTARIO", dataIndex: "comentario", key: "comentario" },
+    {
+      title: "ESTADO",
+      dataIndex: "estado",
+      key: "estado.nombre",
+      align: "center" as const,
+      render: (estado : Estado) => ( estado.nombre ),
+      onCell: (record : Caso) => ({
+        style: {
+          background:
+            record.estado.nombre === "Recibido"
+              ? "#FF9A27"
+              : record.estado.nombre === "Atendido"
+              ? "#5FE04E"
+              : "#D6E04E",
+          color: "black",
+        },
+      }),
+    },
+    {
+      title: "ASIGNADO",
+      dataIndex: "asignado",
+      key: "asignado",
+      align: "center" as const,
+      render: (text: string | null) => text || "—",
+    },
+    {
+      title: "RESOLUCIÓN",
+      dataIndex: "resolucion",
+      key: "resolucion",
+      align: "center" as const,
+      render: (text: string | null) => text || "—",
+    },
     {
       title: "DETALLES",
       key: "detalles",
+      align: "center" as const,
       render: (_: any, record: any) => (
         <a onClick={() => viewMore(record)}>Ver más</a>
       ),
     },
   ];
+  
 
   return (
     <>
-    <div className={styles.tableContainer}>
-      <div className={styles.filters}>
-        <div className={styles.pages}>10</div>
-        <div className={styles.searchs}>
-          <label htmlFor="">Buscar:</label>
-          <input type="text" className={styles.input} />
-          <RangePicker
-            onChange={handleDateFilter}
-            style={{ marginBottom: 16 }}
-          />
+      <div className={styles.tableContainer}>
+        <div className={styles.filters}>
+          <Select value={page} onChange={setPage}>
+            <Select.Option value={5}>5</Select.Option>
+            <Select.Option value={10}>10</Select.Option>
+            <Select.Option value={15}>15</Select.Option>
+          </Select>
+          <div className={styles.searchs}>
+            <label htmlFor="search">Buscar:</label>
+            <input
+              type="text"
+              className={styles.input}
+              value={searchTerm}
+              onChange={handleSearch} // Evento de búsqueda
+              placeholder="Buscar por DNI, nombre, estado o asignado"
+            />
+            <RangePicker onChange={handleDateFilter} />
+          </div>
         </div>
+        <Table
+          bordered
+          columns={columns}
+          dataSource={filteredData}
+          rowKey={'id'}
+          scroll={{ x: "min-content" }}
+          pagination={{ pageSize: page }}
+          
+          loading={loading}
+          rowClassName={(_, index) =>
+            index % 2 === 0 ? styles.rowLight : styles.rowDark
+          }
+        />
       </div>
-      <Table
-        bordered
-        columns={columns}
-        dataSource={filteredData}
-        scroll={{ x: "min-content" }}
-        rowClassName={(_, index) => (index % 2 === 0 ? styles.rowLight : styles.rowDark)}
-      />
-    </div><Button>Exportar</Button>
-    <CaseModal open={openModal} setOpen={setOpenModal}/>
+      <Button>Exportar</Button>
+      <CaseModal open={openModal} setOpen={setOpenModal} />
     </>
   );
 };

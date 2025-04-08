@@ -1,5 +1,6 @@
 .tableContainer {
   padding: 40px;
+  width: 100%;
 }
 
 .filters {
@@ -25,14 +26,6 @@
   background-color: #E8E8E8; 
 }
 
-.rowLight:hover td {
-  background-color: #E8E8E8 !important;
-}
-
 .rowDark td {
   background-color: white;
-}
-
-.rowDark:hover td {
-  background-color: white !important;
 }
