@@ -11,7 +11,6 @@ const useConsulta = () => {
     setLoading(true);
     try {
       const response = await ApiClient.get(`/consultas`);
-      console.log(response.data);
       setConsultas(response.data);
     } catch (error: any) {
       setError(error);

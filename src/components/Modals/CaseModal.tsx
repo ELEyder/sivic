@@ -108,7 +108,6 @@ const CaseModal: React.FC<CaseModalProps> = ({ caso, open, setOpen }) => {
             value={oat || undefined}
             onChange={(e) => setOat(e.target.value)}
           >
-            <option value="">Seleccione</option>
             <option value="OAT CEVMT">OAT CEVMT</option>
             <option value="OAT ASAT LV">OAT ASAT LV</option>
             <option value="OAT ASET">OAT ASET</option>

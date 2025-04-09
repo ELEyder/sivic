@@ -41,7 +41,6 @@ const Contact: React.FC = () => {
       return;
     }
 
-    console.log("Datos enviados:", formData);
   };
 
   return (

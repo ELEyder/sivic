@@ -17,7 +17,8 @@ export interface Caso {
   descripcion: string;
   autorizacion_comunicacion: boolean;
   autorizacion_copia_reporte: boolean;
-  fecha_registro: string;
+  created_at: string;
+  fecha_atendido: string | null;
   fecha_resolucion: string | null;
   estado: Estado;
   asignado: string | null;

@@ -7,6 +7,12 @@ import useCaso from "../../hooks/useCaso";
 import type { ColumnsType } from "antd/es/table";
 import { Caso } from "../../interfaces/Caso";
 import { Estado } from "../../interfaces/Estado";
+import moment from 'moment';
+import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
+import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
+
+dayjs.extend(isSameOrAfter);
+dayjs.extend(isSameOrBefore);
 
 const { RangePicker } = DatePicker;
 
@@ -30,19 +36,29 @@ const CasesTable = () => {
 
   // Filtrado por fecha
   const handleDateFilter = (dates: (dayjs.Dayjs | null)[] | null) => {
-    if (!dates) {
+    if (!dates || dates.length !== 2 || !dates[0] || !dates[1]) {
       setFilteredData(casos);
       return;
     }
-
-    const [start, end] = dates as [dayjs.Dayjs, dayjs.Dayjs];
-
-    const filtered = casos.filter(
-      (item) =>
-        item.fecha_registro >= start.format("YYYY-MM-DD") &&
-        item.fecha_registro <= end.format("YYYY-MM-DD")
-    );
-
+  
+    const [start, end] = dates;
+  
+    const filtered = casos.filter((item) => {
+      const fechas = [
+        item.created_at,
+        item.fecha_atendido,
+        item.fecha_resolucion,
+      ];
+  
+      return fechas.some((fechaStr) => {
+        const fecha = dayjs(fechaStr, "YYYY-MM-DD HH:mm:ss");
+        return (
+          fecha.isSameOrAfter(start.startOf("day")) &&
+          fecha.isSameOrBefore(end.endOf("day"))
+        );
+      });
+    });
+  
     setFilteredData(filtered);
   };
 
@@ -64,7 +80,6 @@ const CasesTable = () => {
 
   const viewMore = (record: Caso) => {
     setCasoSelected(record);
-    console.log("Caso seleccionado:", record);
     setOpenModal(true);
   };
 
@@ -79,16 +94,26 @@ const CasesTable = () => {
     {
       title: "REGISTRO DE CASO",
       dataIndex: "created_at",
-      key: "fecha_registro",
+      key: "created_at",
       align: "center" as const,
-      render: (text: string | null) => text || "—",
+      render: (text: string | null) => 
+        text ? moment(text).format('DD/MM/YYYY HH:mm') : "—",
+    },
+    {
+      title: "FECHA DE ATENCIÓN",
+      dataIndex: "fecha_atencion",
+      key: "fecha_atencion",
+      align: "center" as const,
+      render: (text: string | null) => 
+        text ? moment(text).format('DD/MM/YYYY HH:mm') : "—",
     },
     {
       title: "FECHA DE RESOLUCIÓN",
       dataIndex: "fecha_resolucion",
       key: "fecha_resolucion",
       align: "center" as const,
-      render: (text: string | null) => text || "—",
+      render: (text: string | null) => 
+        text ? moment(text).format('DD/MM/YYYY HH:mm') : "—",
     },
     {
       title: "ESTADO",
@@ -113,14 +138,12 @@ const CasesTable = () => {
       dataIndex: "asignado",
       key: "asignado",
       align: "center" as const,
-      render: (text: string | null) => text || "—",
     },
     {
       title: "RESOLUCIÓN",
       dataIndex: "resolucion",
       key: "resolucion",
       align: "center" as const,
-      render: (text: string | null) => text || "—",
     },
     {
       title: "DETALLES",

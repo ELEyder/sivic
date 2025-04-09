@@ -11,7 +11,6 @@ const useCaso = () => {
     setLoading(true);
     try {
       const response = await ApiClient.get(`/casos`);
-      console.log(response.data);
       setCasos(response.data);
     } catch (error: any) {
       setError(error);
@@ -25,10 +24,8 @@ const useCaso = () => {
     setLoading(true);
     try {
       const response = await ApiClient.post(`/casos`, data);
-      console.log(response.data);
       setCasos(response.data);
     } catch (error: any) {
-      console.log(error.response.data.message);
       setError(error);
 
     } finally {
@@ -40,12 +37,9 @@ const useCaso = () => {
     setLoading(true);
     try {
       const response = await ApiClientFiles.post(`/casos/${id}`, data);
-      console.log(response.data);
       setCasos(response.data);
     } catch (error: any) {
-      console.log(error.response.data.message);
       setError(error);
-
     } finally {
       setLoading(false);
     }

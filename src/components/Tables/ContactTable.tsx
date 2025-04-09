@@ -22,19 +22,24 @@ const ContactTable = () => {
 
   // Filtrado por fecha
   const handleDateFilter = (dates: (dayjs.Dayjs | null)[] | null) => {
-    if (!dates) {
+    if (!dates || dates.length !== 2 || !dates[0] || !dates[1]) {
       setFilteredData(consultas);
       return;
     }
 
-    const [start, end] = dates as [dayjs.Dayjs, dayjs.Dayjs];
+    const [start, end] = dates;
 
-    const filtered = consultas.filter(
-      (item) =>
-        item.created_at >= start.format("YYYY-MM-DD") &&
-        item.created_at <= end.format("YYYY-MM-DD")
-    );
+    const filtered = consultas.filter((item) => {
+      const fechas = [item.created_at, item.updated_at];
 
+      return fechas.some((fechaStr) => {
+        const fecha = dayjs(fechaStr, "YYYY-MM-DD HH:mm:ss");
+        return (
+          fecha.isSameOrAfter(start.startOf("day")) &&
+          fecha.isSameOrBefore(end.endOf("day"))
+        );
+      });
+    });
     setFilteredData(filtered);
   };
 
@@ -72,20 +77,23 @@ const ContactTable = () => {
       dataIndex: "updated_at",
       key: "updated_at",
     },
-    { title: "ESTADO", dataIndex: "estado", key: "estado",
-      render: (estado : Estado) => ( estado.nombre ),
-            onCell: (record : Consulta) => ({
-              style: {
-                background:
-                  record.estado.nombre === "Recibido"
-                    ? "#FF9A27"
-                    : record.estado.nombre === "Atendido"
-                    ? "#5FE04E"
-                    : "#D6E04E",
-                color: "black",
-              },
-            }),
-     },
+    {
+      title: "ESTADO",
+      dataIndex: "estado",
+      key: "estado",
+      render: (estado: Estado) => estado.nombre,
+      onCell: (record: Consulta) => ({
+        style: {
+          background:
+            record.estado.nombre === "Recibido"
+              ? "#FF9A27"
+              : record.estado.nombre === "Atendido"
+              ? "#5FE04E"
+              : "#D6E04E",
+          color: "black",
+        },
+      }),
+    },
     { title: "CORREO", dataIndex: "correo", key: "correo" },
     { title: "MENSAJE", dataIndex: "mensaje", key: "mensaje" },
     {
@@ -130,7 +138,7 @@ const ContactTable = () => {
             index % 2 === 0 ? styles.rowLight : styles.rowDark
           }
           style={{
-            width: "100%"
+            width: "100%",
           }}
         />
       </div>
