@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ApiClient } from "../services/ApiClient";
+import { ApiClient, ApiClientFiles } from "../services/ApiClient";
 import { Caso } from "../interfaces/Caso";
 
 const useCaso = () => {
@@ -36,10 +36,10 @@ const useCaso = () => {
     }
   };
 
-  const updateCaso = async (id:number, data : any) => {
+  const updateCaso = async (id:number, data : FormData) => {
     setLoading(true);
     try {
-      const response = await ApiClient.put(`/casos/${id}`, data);
+      const response = await ApiClientFiles.post(`/casos/${id}`, data);
       console.log(response.data);
       setCasos(response.data);
     } catch (error: any) {

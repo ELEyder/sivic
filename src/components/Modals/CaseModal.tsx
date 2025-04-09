@@ -1,4 +1,4 @@
-import { Button, Input } from "antd";
+import { Button } from "antd";
 import DefaultModal from "./DefaultModal";
 import { useEffect, useState } from "react";
 import SelectFile from "../SelectFile/SelectFile";
@@ -26,10 +26,9 @@ const CaseModal: React.FC<CaseModalProps> = ({ caso, open, setOpen }) => {
 
   const onSubmit = async (e: any) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData.entries());
-    console.log(data);
-    await updateCaso(caso.id, data);
+    const formData = new FormData(e.target as HTMLFormElement);
+    formData.append('_method', 'PUT');
+    await updateCaso(caso.id, formData);
     setOpen(false);
   };
 
@@ -87,7 +86,7 @@ const CaseModal: React.FC<CaseModalProps> = ({ caso, open, setOpen }) => {
           </p>
           <p>{caso.autorizacion_copia_reporte ? "Sí" : "No"}</p>
         </div>
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmit} encType="multipart/form-data">
           <p>
             <strong>Estado</strong>
           </p>
@@ -128,7 +127,7 @@ const CaseModal: React.FC<CaseModalProps> = ({ caso, open, setOpen }) => {
             <strong>Subir archivo (Resolución)</strong>
           </p>
           <div>
-            <SelectFile /> <p>(Máximo 5 MB, PDF o JPG)</p>
+            <SelectFile name="resolucion_archivo"/> <p>(Máximo 5 MB, PDF o JPG)</p>
           </div>
           <div style={{ marginTop: 20, textAlign: "center" }}>
             <Button

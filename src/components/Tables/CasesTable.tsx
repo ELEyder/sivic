@@ -148,7 +148,7 @@ const CasesTable = () => {
               type="text"
               className={styles.input}
               value={searchTerm}
-              onChange={handleSearch} // Evento de búsqueda
+              onChange={handleSearch}
               placeholder="Buscar por DNI, nombre, estado o asignado"
             />
             <RangePicker onChange={handleDateFilter} />
