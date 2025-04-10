@@ -1,6 +1,6 @@
 import { Estado } from "./Estado";
 
-export interface Consulta {
+export interface Contacto {
   id?: number;
   nombre_completo: string;
   dni: string;

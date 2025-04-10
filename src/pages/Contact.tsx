@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Form, Input, Button } from "antd";
 import ReCAPTCHA from "react-google-recaptcha";
+import styles from "./Contact.module.css";
+import Button from "../components/Buttons/Button";
 
-// Definimos una interfaz para el formulario
 interface FormData {
   nombre: string;
   correo: string;
@@ -22,7 +22,9 @@ const Contact: React.FC = () => {
 
   const [captchaValid, setCaptchaValid] = useState<boolean>(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -41,77 +43,85 @@ const Contact: React.FC = () => {
       return;
     }
 
+    console.log(formData);
   };
 
   return (
-    <div className="container">
-      <div className="left">
+    <div className={styles.container}>
+      <div className={styles.left}>
         <h2>Complete el siguiente formulario y nos contactaremos con usted</h2>
       </div>
 
-      <div className="right">
-        <Form layout="vertical" onSubmitCapture={handleSubmit}>
-          <Form.Item label="Nombre Completo *">
-            <Input
-              placeholder="Tu nombre completo"
-              name="nombre"
-              value={formData.nombre}
-              onChange={handleChange}
-              required
-            />
-          </Form.Item>
-
-          <Form.Item label="Correo Electrónico *">
-            <Input
-              type="email"
-              placeholder="Tu correo"
-              name="correo"
-              value={formData.correo}
-              onChange={handleChange}
-              required
-            />
-          </Form.Item>
-
-          <Form.Item label="DNI *">
-            <Input
-              placeholder="Tu DNI"
-              name="dni"
-              value={formData.dni}
-              onChange={handleChange}
-              required
-            />
-          </Form.Item>
-
-          <Form.Item label="Teléfono *">
-            <Input
-              placeholder="Tu teléfono"
-              name="telefono"
-              value={formData.telefono}
-              onChange={handleChange}
-              required
-            />
-          </Form.Item>
-
-          <Form.Item label="Mensaje">
-            <Input.TextArea
-              rows={4}
-              placeholder="Ingresa tu mensaje"
-              name="mensaje"
-              value={formData.mensaje}
-              onChange={handleChange}
-            />
-          </Form.Item>
-
-          <Form.Item>
-            <ReCAPTCHA sitekey="TU_SITE_KEY" onChange={handleCaptcha} />
-          </Form.Item>
-
-          <Form.Item>
-            <Button type="primary" htmlType="submit" className="submit-button">
-              Enviar
-            </Button>
-          </Form.Item>
-        </Form>
+      <div className={styles.right}>
+        <div className={styles.formContainer}>
+          <form className={styles.form} onSubmitCapture={handleSubmit}>
+            <div className={styles.formFields}>
+              <div className={styles.field}>
+                <label>Nombre Completo *</label>
+                <input
+                  placeholder="Tu nombre completo"
+                  name="nombre"
+                  value={formData.nombre}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className={styles.field}>
+                <label>Correo Electrónico *</label>
+                <input
+                  type="email"
+                  placeholder="Tu correo"
+                  name="correo"
+                  value={formData.correo}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className={styles.field}>
+                <label>DNI *</label>
+                <input
+                  placeholder="Tu DNI"
+                  name="dni"
+                  pattern="^\d{8}$"
+                  title="El DNI debe tener exactamente 8 números"
+                  value={formData.dni}
+                  onChange={handleChange}
+                  maxLength={8}
+                  required
+                />
+              </div>
+              <div className={styles.field}>
+                <label>Teléfono *</label>
+                <input
+                  placeholder="Tu teléfono"
+                  name="telefono"
+                  value={formData.telefono}
+                  onChange={handleChange}
+                  pattern="^\d+$"
+                  title="El teléfono debe contener solo números"
+                  required
+                />
+              </div>
+              <div className={styles.field}>
+                <label>Mensaje</label>
+                <textarea
+                  rows={4}
+                  placeholder="Ingresa tu mensaje"
+                  name="mensaje"
+                  value={formData.mensaje}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className={styles.field}>
+                <ReCAPTCHA
+                  sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
+                  onChange={handleCaptcha}
+                />
+              </div>
+              <Button type="submit">Enviar</Button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

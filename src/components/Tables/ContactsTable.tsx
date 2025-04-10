@@ -1,35 +1,35 @@
 import { useEffect, useState } from "react";
 import { Table, DatePicker, Select } from "antd";
 import dayjs from "dayjs";
-import styles from "./ContactTable.module.css";
+import styles from "./ContactsTable.module.css";
 import ContactModal from "../Modals/ContactModal";
-import useConsulta from "../../hooks/useConsulta";
-import { Consulta } from "../../interfaces/Consulta";
+import useContacto from "../../hooks/useContacto";
+import { Contacto } from "../../interfaces/Contacto";
 import { Estado } from "../../interfaces/Estado";
 
 const { RangePicker } = DatePicker;
 
-const ContactTable = () => {
-  const { consultas, loading } = useConsulta();
+const ContactsTable = () => {
+  const { contactos, loading } = useContacto();
   const [page, setPage] = useState(10);
   const [searchTerm, setSearchTerm] = useState(""); // Estado para el término de búsqueda
-  const [filteredData, setFilteredData] = useState(consultas);
+  const [filteredData, setFilteredData] = useState(contactos);
   const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
-    setFilteredData(consultas);
-  }, [consultas]);
+    setFilteredData(contactos);
+  }, [contactos]);
 
   // Filtrado por fecha
   const handleDateFilter = (dates: (dayjs.Dayjs | null)[] | null) => {
     if (!dates || dates.length !== 2 || !dates[0] || !dates[1]) {
-      setFilteredData(consultas);
+      setFilteredData(contactos);
       return;
     }
 
     const [start, end] = dates;
 
-    const filtered = consultas.filter((item) => {
+    const filtered = contactos.filter((item) => {
       const fechas = [item.created_at, item.updated_at];
 
       return fechas.some((fechaStr) => {
@@ -48,7 +48,7 @@ const ContactTable = () => {
     const value = e.target.value.toLowerCase();
     setSearchTerm(value);
 
-    const filtered = consultas.filter(
+    const filtered = contactos.filter(
       (item) =>
         item.nombre_completo.toLowerCase().includes(value) ||
         item.dni.includes(value) ||
@@ -82,7 +82,7 @@ const ContactTable = () => {
       dataIndex: "estado",
       key: "estado",
       render: (estado: Estado) => estado.nombre,
-      onCell: (record: Consulta) => ({
+      onCell: (record: Contacto) => ({
         style: {
           background:
             record.estado.nombre === "Recibido"
@@ -147,4 +147,4 @@ const ContactTable = () => {
   );
 };
 
-export default ContactTable;
+export default ContactsTable;

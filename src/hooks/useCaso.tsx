@@ -19,6 +19,17 @@ const useCaso = () => {
     }
   };
 
+  const getCasosByDni = async (dni : string) => {
+    setLoading(true);
+    try {
+      const response = await ApiClient.get(`/casos?dni=${dni}`);
+      return response;
+    } catch (error: any) {
+      setError(error);
+    } finally {
+      setLoading(false);
+    }
+  };
   
   const createCaso = async (data : any) => {
     setLoading(true);
@@ -53,7 +64,7 @@ const useCaso = () => {
     fetch();
   }, []);
 
-  return { casos, loading, error, getCasos, createCaso, updateCaso };
+  return { casos, loading, error, getCasos, createCaso, updateCaso, getCasosByDni };
 };
 
 export default useCaso;

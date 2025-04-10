@@ -1,98 +1,123 @@
 import { Table } from "antd";
 import DefaultModal from "./DefaultModal";
 import Docs from "../Icons/Docs";
+import useCaso from "../../hooks/useCaso";
+import { useEffect, useState } from "react";
+import { TipoCaso } from "../../interfaces/TipoCaso";
+import moment from "moment";
+import { Estado } from "../../interfaces/Estado";
+import { Caso } from "../../interfaces/Caso";
 
 const columns = [
   {
     title: "NOMBRES",
-    dataIndex: "nombre",
-    key: "nombre",
-    align: "center" as "center"
+    dataIndex: "nombre_completo",
+    key: "nombre_completo",
+    align: "center" as "center",
   },
   {
     title: "TIPO DE CASO",
-    dataIndex: "tipoCaso",
-    key: "tipoCaso",
-    align: "center" as "center"
+    dataIndex: "tipo_caso",
+    key: "tipo_caso",
+    align: "center" as "center",
+    render: (text: TipoCaso) => text.nombre,
   },
   {
     title: "FECHA DE ATENCIÓN",
-    dataIndex: "fechaAtencion",
-    key: "fechaAtencion",
-    align: "center" as "center"
+    dataIndex: "fecha_atencion",
+    key: "fecha_atencion",
+    align: "center" as "center",
+    render: (text: string | null) =>
+      text ? moment(text).format("DD/MM/YYYY HH:mm") : "—",
   },
   {
     title: "FECHA DE RESOLUCIÓN",
-    dataIndex: "fechaResolucion",
-    key: "fechaResolucion",
-    align: "center" as "center"
+    dataIndex: "fecha_resolucion",
+    key: "fecha_resolucion",
+    align: "center" as "center",
+    render: (text: string | null) =>
+      text ? moment(text).format("DD/MM/YYYY HH:mm") : "—",
   },
   {
     title: "DETALLES DE LA RESOLUCIÓN",
-    dataIndex: "detalles",
-    key: "detalles",
-    align: "center" as "center"
+    dataIndex: "resolucion",
+    key: "resolucion",
+    align: "center" as "center",
+    render: (text: String) => text || "-",
   },
   {
     title: "ESTADO",
     dataIndex: "estado",
     key: "estado",
-    align: "center" as "center"
+    align: "center" as "center",
+    render: (text: Estado) => text.nombre,
+    onCell: (record: Caso) => ({
+      style: {
+        background:
+          record.estado.nombre === "Recibido"
+            ? "#FF0D0D"
+            : record.estado.nombre === "Resuelto"
+            ? "#5FE04E"
+            : "#D6E04E",
+        color: record.estado.nombre === "Recibido" ? "white" : "black",
+      },
+    }),
   },
   {
     title: "DESCARGAR RESOLUCIÓN",
-    key: "descargar",
+    dataIndex: "resolucion_url",
+    key: "resolucion_url",
     align: "center" as "center",
-    render: () => (
-      <button style={{ background: "none", border: "none", cursor: "pointer" }}>
+    render: (text : String) => (
+      <button style={{ background: "none", border: "none", cursor: "pointer" }} onClick={()=> {
+        console.log(text || "No hay resolición subida")
+      }}>
         <Docs />
       </button>
     ),
   },
 ];
 
-const data = [
-  {
-    key: "1",
-    nombre: "Melecio",
-    tipoCaso: "Demora en la entrega de...",
-    fechaAtencion: "10/01/2025",
-    fechaResolucion: "1/02/2025",
-    detalles: "La queja fue transferida a la dirección de salud Lima Norte.",
-    estado: "Resuelto",
-  },
-  {
-    key: "2",
-    nombre: "Melecio",
-    tipoCaso: "Demora en la entrega de...",
-    fechaAtencion: "10/01/2025",
-    fechaResolucion: "1/02/2025",
-    detalles: "La queja fue transferida a la dirección de salud Lima Norte.",
-    estado: "Resuelto",
-  },
-];
+const ConsultModal = ({ open, setOpen, dni }: any) => {
+  const { getCasosByDni } = useCaso();
+  const [data, setData] = useState([]);
 
-const ConsultModal = ({ open, setOpen }: any) => {
+  useEffect(() => {
+    fetchCasos();
+  }, [dni]);
+
+  const fetchCasos = async () => {
+    let response = await getCasosByDni(dni);
+    setData(response?.data);
+  };
+
   return (
     <DefaultModal open={open} setOpen={setOpen}>
-      <div style={{display: "flex", flexDirection: "column", alignItems: "end", gap: "10px"}}>
-      <h3 style={{width: "100%", textAlign: "center"}}>RESULTADOS</h3>
-      <Table columns={columns} dataSource={data} pagination={false} />
-      <button
+      <div
         style={{
-          marginTop: "10px",
-          padding: "8px 16px",
-          backgroundColor: "#007bff",
-          color: "white",
-          border: "none",
-          borderRadius: "5px",
-          cursor: "pointer",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "end",
+          gap: "10px",
         }}
-        onClick={() => setOpen(false)}
+      >
+        <h3 style={{ width: "100%", textAlign: "center" }}>RESULTADOS</h3>
+        <Table columns={columns} dataSource={data} pagination={false} />
+        <button
+          style={{
+            marginTop: "10px",
+            padding: "8px 16px",
+            backgroundColor: "#007bff",
+            color: "white",
+            border: "none",
+            borderRadius: "5px",
+            cursor: "pointer",
+          }}
+          onClick={() => setOpen(false)}
         >
-        Aceptar
-      </button>
-        </div>
+          Aceptar
+        </button>
+      </div>
     </DefaultModal>
   );
 };

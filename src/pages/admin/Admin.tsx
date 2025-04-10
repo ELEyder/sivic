@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Button from "../../components/Buttons/Button";
 import CasesTable from "../../components/Tables/CasesTable";
-import ContactTable from "../../components/Tables/ContactTable";
+import ContactsTable from "../../components/Tables/ContactsTable";
 import styles from "./Admin.module.css";
 import SelectFile from "../../components/SelectFile/SelectFile";
 
@@ -19,7 +19,7 @@ const Admin = () => {
       </section>
       <section className={styles.cases}>
         <h2>Datos ingresados al formulario de contáctanos</h2>
-        <ContactTable />
+        <ContactsTable />
       </section>
       <section className={styles.adminPage}>
         <h1>Administrar web</h1>

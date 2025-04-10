@@ -27,7 +27,7 @@
 .inputContainer label {
   flex: 1;
 }
-.inputContainer input, textarea {
+.inputContainer input, .inputContainer textarea {
   width: 587px !important;
 }
 

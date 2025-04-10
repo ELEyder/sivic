@@ -12,15 +12,16 @@ export interface Caso {
   departamento: string;
   provincia: string;
   distrito: string;
-  tipo_caso: TipoCaso;
   lugar_caso: string;
   descripcion: string;
   autorizacion_comunicacion: boolean;
   autorizacion_copia_reporte: boolean;
   created_at: string;
-  fecha_atendido: string | null;
+  fecha_atencion: string | null;
   fecha_resolucion: string | null;
-  estado: Estado;
   asignado: string | null;
   resolucion: string | null;
+  resolucion_url: string | null;
+  tipo_caso: TipoCaso;
+  estado: Estado;
 }

@@ -4,8 +4,9 @@ import styles from "./Consult.module.css";
 import ConsultModal from "../components/Modals/ConsultModal";
 
 const Consult = () => {
-    const [openModal, setOpenModal] = useState(false);
-  
+  const [openModal, setOpenModal] = useState(false);
+  const [dni, setDni] = useState("");
+
   return (
     <>
       <section className={styles.home}>
@@ -19,13 +20,24 @@ const Consult = () => {
               en el siguiente espacio y haga clic en consultar
             </p>
             <div className={styles.inputContainer}>
-              <input type="text" className={styles.input} />
-              <Button type={"secondary"} onClick={() => setOpenModal(true)}>Consultar</Button>
+              <input
+                type="text"
+                className={styles.input}
+                pattern="^\d{8}$"
+                title="El DNI debe tener exactamente 8 números"
+                maxLength={8}
+                required
+                onChange={(e) => setDni(e.target.value)}
+                value={dni}
+              />
+              <Button type={"secondary"} onClick={() => setOpenModal(true)}>
+                Consultar
+              </Button>
             </div>
           </div>
         </div>
       </section>
-      <ConsultModal open={openModal} setOpen={setOpenModal}/>
+      <ConsultModal open={openModal} setOpen={setOpenModal} dni={dni}/>
     </>
   );
 };

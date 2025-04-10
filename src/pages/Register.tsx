@@ -43,8 +43,9 @@ const Register = () => {
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
     data.lugar_caso = `${data.lugar_caso} - "${data.nombre_lugar_caso}"`;
-    createCaso(data);
+    // createCaso(data);
     setOpenModal(true);
+    console.log(data)
   };
 
   return (
