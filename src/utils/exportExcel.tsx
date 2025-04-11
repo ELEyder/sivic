@@ -1,5 +1,6 @@
 import * as XLSX from "xlsx";
 import { Caso } from "../interfaces/Caso";
+import { Contacto } from "../interfaces/Contacto";
 
 export function exportJsonToExcel(
   datos: any[],
@@ -45,6 +46,16 @@ export function exportCasosToExcel(datos: Caso[]) {
   exportJsonToExcel(datosFormateados, "casos.xlsx", "Casos");
 }
 
-export function exporContactosToExcel(data: Caso[]) {
-  exportJsonToExcel(data, "contactos.xlsx", "Casos");
+export function exportContactosToExcel(datos: Contacto[]) {
+  const datosFormateados = datos.map((d) => ({
+    ID: d.id,
+    "Nombre completo": d.nombre_completo,
+    Correo: d.correo,
+    DNI: d.dni,
+    Teléfono: d.telefono,
+    Mensaje: d.mensaje,
+    Estado: d.estado?.nombre ?? "",
+    "Creado en": d.created_at,
+  }));
+  exportJsonToExcel(datosFormateados, "contactos.xlsx", "Contactos");
 }

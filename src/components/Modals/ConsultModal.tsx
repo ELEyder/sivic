@@ -22,7 +22,7 @@ const columns = [
     align: "center" as "center",
     render: (text: TipoCaso) => text.nombre,
   },
-  {
+  {         
     title: "FECHA DE ATENCIÓN",
     dataIndex: "fecha_atencion",
     key: "fecha_atencion",

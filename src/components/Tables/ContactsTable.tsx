@@ -6,11 +6,17 @@ import ContactModal from "../Modals/ContactModal";
 import useContacto from "../../hooks/useContacto";
 import { Contacto } from "../../interfaces/Contacto";
 import { Estado } from "../../interfaces/Estado";
+import Button from "../Buttons/Button";
+import { exportContactosToExcel } from "../../utils/exportExcel";
+import moment from "moment";
 
 const { RangePicker } = DatePicker;
 
 const ContactsTable = () => {
-  const { contactos, loading } = useContacto();
+  const { contactos, loading, getContactos } = useContacto();
+  const [contactoSelected, setContactoSelected] = useState<Contacto>(
+    {} as Contacto
+  );
   const [page, setPage] = useState(10);
   const [searchTerm, setSearchTerm] = useState(""); // Estado para el término de búsqueda
   const [filteredData, setFilteredData] = useState(contactos);
@@ -19,6 +25,12 @@ const ContactsTable = () => {
   useEffect(() => {
     setFilteredData(contactos);
   }, [contactos]);
+
+  useEffect(() => {
+    if (!openModal) {
+      getContactos();
+    }
+  }, [openModal]);
 
   // Filtrado por fecha
   const handleDateFilter = (dates: (dayjs.Dayjs | null)[] | null) => {
@@ -53,7 +65,7 @@ const ContactsTable = () => {
         item.nombre_completo.toLowerCase().includes(value) ||
         item.dni.includes(value) ||
         item.correo.toLowerCase().includes(value) ||
-        item.estado.nombre.toLowerCase().includes(value)
+        item.estado?.nombre.toLowerCase().includes(value)
     );
 
     setFilteredData(filtered);
@@ -61,6 +73,7 @@ const ContactsTable = () => {
 
   const viewMore = (record: any) => {
     console.log(record);
+    setContactoSelected(record);
     setOpenModal(true);
   };
 
@@ -71,11 +84,15 @@ const ContactsTable = () => {
       title: "FECHA DE REGISTRO",
       dataIndex: "created_at",
       key: "created_at",
+      render: (text: string | null) =>
+        text ? moment(text).format("DD/MM/YYYY HH:mm") : "—",
     },
     {
       title: "FECHA DE ATENCIÓN",
       dataIndex: "updated_at",
       key: "updated_at",
+      render: (text: string | null) =>
+        text ? moment(text).format("DD/MM/YYYY HH:mm") : "—",
     },
     {
       title: "ESTADO",
@@ -85,9 +102,9 @@ const ContactsTable = () => {
       onCell: (record: Contacto) => ({
         style: {
           background:
-            record.estado.nombre === "Recibido"
+            record.estado?.nombre === "Recibido"
               ? "#FF9A27"
-              : record.estado.nombre === "Atendido"
+              : record.estado?.nombre === "Atendido"
               ? "#5FE04E"
               : "#D6E04E",
           color: "black",
@@ -141,8 +158,15 @@ const ContactsTable = () => {
             width: "100%",
           }}
         />
+        <Button onClick={() => exportContactosToExcel(contactos)}>
+          Exportar
+        </Button>
       </div>
-      <ContactModal open={openModal} setOpen={setOpenModal} />
+      <ContactModal
+        contacto={contactoSelected}
+        open={openModal}
+        setOpen={setOpenModal}
+      />
     </>
   );
 };

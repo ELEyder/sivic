@@ -32,4 +32,14 @@
 
 .field {
   width: 460px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.field input,
+.field textarea {
+  padding: 8px 18px;
+  border-radius: 20px;
+  border: 1px solid black;
 }

@@ -34,11 +34,9 @@ const useCaso = () => {
   const createCaso = async (data : any) => {
     setLoading(true);
     try {
-      const response = await ApiClient.post(`/casos`, data);
-      setCasos(response.data);
+      await ApiClient.post(`/casos`, data);
     } catch (error: any) {
       setError(error);
-
     } finally {
       setLoading(false);
     }
