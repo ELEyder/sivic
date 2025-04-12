@@ -16,7 +16,9 @@ const CaseModal: React.FC<CaseModalProps> = ({ caso, open, setOpen }) => {
   const { updateCaso } = useCaso();
   const [estado, setEstado] = useState<number>(caso.estado?.id);
   const [oat, setOat] = useState<string | null>(caso.asignado || null);
-  const [resolucion, setResolucion] = useState<string | null>(caso.resolucion || null);
+  const [resolucion, setResolucion] = useState<string | null>(
+    caso.resolucion || null
+  );
 
   useEffect(() => {
     setEstado(caso.estado?.id);
@@ -27,7 +29,7 @@ const CaseModal: React.FC<CaseModalProps> = ({ caso, open, setOpen }) => {
   const onSubmit = async (e: any) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
-    formData.append('_method', 'PUT');
+    formData.append("_method", "PUT");
     await updateCaso(caso.id, formData);
     setOpen(false);
   };
@@ -126,7 +128,13 @@ const CaseModal: React.FC<CaseModalProps> = ({ caso, open, setOpen }) => {
             <strong>Subir archivo (Resolución)</strong>
           </p>
           <div>
-            <SelectFile name="resolucion_archivo"/> <p>(Máximo 5 MB, PDF o JPG)</p>
+            <SelectFile
+              name="resolucion_archivo"
+              accept={
+                ".jpg,.jpeg,.png,.webp,.xls,.xlsx,image/*,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+              }
+            />
+            <p>(Máximo 5 MB, PDF o JPG)</p>
           </div>
           <div style={{ marginTop: 20, textAlign: "center" }}>
             <Button

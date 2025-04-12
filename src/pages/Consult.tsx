@@ -26,11 +26,13 @@ const Consult = () => {
                 pattern="^\d{8}$"
                 title="El DNI debe tener exactamente 8 números"
                 maxLength={8}
-                required
                 onChange={(e) => setDni(e.target.value)}
                 value={dni}
+                required
               />
-              <Button type={"secondary"} onClick={() => setOpenModal(true)}>
+              <Button type={"secondary"} onClick={() => {
+                setOpenModal(true)
+                }}>
                 Consultar
               </Button>
             </div>

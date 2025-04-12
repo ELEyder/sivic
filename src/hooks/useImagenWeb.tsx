@@ -21,7 +21,8 @@ const useImagenWeb = () => {
   const updateImagenesWeb = async (data: FormData) => {
     setLoading(true);
     try {
-      await ApiClientFiles.put(`/imagenes_web/`, data);
+      const response = await ApiClientFiles.post(`/imagenes_web/`, data);
+      console.log(response.data)
     } catch (error: any) {
       setError(error);
     } finally {

@@ -2,7 +2,7 @@ import { Table } from "antd";
 import DefaultModal from "./DefaultModal";
 import Docs from "../Icons/Docs";
 import useCaso from "../../hooks/useCaso";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { TipoCaso } from "../../interfaces/TipoCaso";
 import moment from "moment";
 import { Estado } from "../../interfaces/Estado";
@@ -79,16 +79,18 @@ const columns = [
 ];
 
 const ConsultModal = ({ open, setOpen, dni }: any) => {
-  const { getCasosByDni } = useCaso();
-  const [data, setData] = useState([]);
+  const { casos, getCasos, loading } = useCaso();
 
   useEffect(() => {
     fetchCasos();
-  }, [dni]);
+  }, []);
+
+  useEffect(() => {
+    if (open) fetchCasos();
+  }, [open]);
 
   const fetchCasos = async () => {
-    let response = await getCasosByDni(dni);
-    setData(response?.data);
+    await getCasos({dni : dni});
   };
 
   return (
@@ -102,7 +104,7 @@ const ConsultModal = ({ open, setOpen, dni }: any) => {
         }}
       >
         <h3 style={{ width: "100%", textAlign: "center" }}>RESULTADOS</h3>
-        <Table columns={columns} dataSource={data} pagination={false} />
+        <Table columns={columns} dataSource={casos} pagination={false} rowKey={"id"} loading={loading}/>
         <button
           style={{
             marginTop: "10px",

@@ -2,21 +2,23 @@ import styles from "./SelectFile.module.css";
 
 interface SelectFileProps {
   name?: string;
-  onFileChange: (key: string, file: File) => void;
+  accept?: string;
+  onFileChange?: (key: string, file: File) => void;
 }
 
-const SelectFile = ({ name = '', onFileChange = () => {} }: SelectFileProps) => {
+const SelectFile = ({ name = '', accept= "image/*", onFileChange = () => {} }: SelectFileProps) => {
   return (
     <div className={styles.customFile}>
-      <label htmlFor="file-upload">Seleccione un archivo</label>
+      <label htmlFor={name}>Seleccione un archivo</label>
       <input
         type="file"
-        id="file-upload"
+        accept={accept}
+        id={name}
         name={name}
         onChange={(e) => {
           const file = e.target.files?.[0];
           if (file) {
-            console.log("Archivo seleccionado:", file.name);
+            console.log("Archivo seleccionado:", name);
             onFileChange(name, file)
           }
         }}

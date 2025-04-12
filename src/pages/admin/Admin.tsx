@@ -9,7 +9,8 @@ import useImagenWeb from "../../hooks/useImagenWeb";
 import { Image } from "antd";
 
 const Admin = () => {
-  const { imagenesWeb, updateImagenesWeb } = useImagenWeb();
+  const { updateImagenesWeb } = useImagenWeb();
+  const [urls, setUrls] = useState(Date.now());
   const [imagenes, setImagenes] = useState({
     logo: null,
     carrusel1: null,
@@ -18,6 +19,8 @@ const Admin = () => {
   });
 
   const handleFileChange = (key: any, file: any) => {
+    console.log(key);
+    console.log(file);
     setImagenes((prev) => ({ ...prev, [key]: file }));
   };
 
@@ -30,13 +33,15 @@ const Admin = () => {
     });
 
     try {
-      updateImagenesWeb(formData);
-      alert("Imágenes actualizadas correctamente");
+      formData.append("_method", "PUT");
+      await updateImagenesWeb(formData);
+      setUrls(Date.now());
     } catch (err) {
       alert("Error al subir imágenes");
       console.error(err);
     }
   };
+
   return (
     <>
       <section className={styles.graphs}>
@@ -52,16 +57,22 @@ const Admin = () => {
         <h2>Datos ingresados al formulario de contáctanos</h2>
         <ContactsTable />
       </section>
-      <form className={styles.adminPage} onSubmit={handleSubmit}>
+      <form
+        className={styles.adminPage}
+        onSubmit={handleSubmit}
+        encType="multipart/form-data"
+      >
         <h1>Administrar web</h1>
         <div className={styles.adminLogo}>
           <h2>Logo de la web</h2>
           <div className={styles.logoConfig}>
             <Image
               src={`${
-                import.meta.env.VITE_BACKEND_BASE_URL + imagenesWeb.logo
+                import.meta.env.VITE_BACKEND_BASE_URL +
+                "/storage/imagenes_web/logo.png?" + urls
               }`}
               alt="logo"
+              height={100}
               fallback="./loading.gif"
             />
             <SelectFile name="logo" onFileChange={handleFileChange} />
@@ -75,11 +86,12 @@ const Admin = () => {
             <div className={styles.carrouselContainer}>
               <Image
                 src={
-                  import.meta.env.VITE_BACKEND_BASE_URL + imagenesWeb.carrusel1
+                  import.meta.env.VITE_BACKEND_BASE_URL +
+                  "/storage/imagenes_web/carrusel1.png?" + urls
                 }
                 alt="logo"
                 fallback="./loading.gif"
-                width={"290px"}
+                height={200}
               />
               <SelectFile name="carrusel1" onFileChange={handleFileChange} />
               <p>(1170 x 2880 px)</p>
@@ -87,11 +99,12 @@ const Admin = () => {
             <div className={styles.carrouselContainer}>
               <Image
                 src={
-                  import.meta.env.VITE_BACKEND_BASE_URL + imagenesWeb.carrusel2
+                  import.meta.env.VITE_BACKEND_BASE_URL +
+                  "/storage/imagenes_web/carrusel2.png?" + urls
                 }
                 alt="logo"
                 fallback="./loading.gif"
-                width={"290px"}
+                height={200}
               />
               <SelectFile name="carrusel2" onFileChange={handleFileChange} />
               <p>(1170 x 2880 px)</p>
@@ -99,11 +112,12 @@ const Admin = () => {
             <div className={styles.carrouselContainer}>
               <Image
                 src={
-                  import.meta.env.VITE_BACKEND_BASE_URL + imagenesWeb.carrusel3
+                  import.meta.env.VITE_BACKEND_BASE_URL +
+                  "/storage/imagenes_web/carrusel3.png?" + urls
                 }
                 alt="logo"
                 fallback="./loading.gif"
-                width={"290px"}
+                height={200}
               />
               <SelectFile name="carrusel3" onFileChange={handleFileChange} />
               <p>(1170 x 2880 px)</p>
