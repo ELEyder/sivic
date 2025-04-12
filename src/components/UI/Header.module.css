@@ -7,8 +7,17 @@
 }
 
 .logo {
-  width: 265px;
-  height: 87px;
+  width: 200px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo div img,
+.logo div {
+  margin: auto;
+  height: 50px;
 }
 
 .nav {
@@ -30,7 +39,6 @@
   position: relative;
   color: black;
 }
-
 
 .active {
   font-weight: bold;

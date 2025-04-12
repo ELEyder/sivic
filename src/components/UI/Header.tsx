@@ -2,15 +2,28 @@ import { Link, useLocation } from "react-router-dom";
 import styles from "./Header.module.css";
 import Button from "../Buttons/Button";
 import Profile from "../Icons/Profile";
+import useImagenWeb from "../../hooks/useImagenWeb";
+import { Image } from "antd";
 
 const Header = () => {
   const location = useLocation();
+  const { imagenesWeb } = useImagenWeb();
 
   return (
     <header className={styles.header}>
       <nav>
         <div className={styles.nav}>
-          <img className={styles.logo} src="./logo.png" alt="logo" />
+          <div className={styles.logo}>
+            <Image
+              src={
+                import.meta.env.VITE_BACKEND_BASE_URL + imagenesWeb.logo 
+              }
+              height={"50px"}
+              preview={false}
+              fallback="./loading.gif"
+            />
+          </div>
+
           <Link
             to="/"
             className={location.pathname === "/" ? styles.active : ""}
@@ -40,7 +53,12 @@ const Header = () => {
         </div>
       </nav>
       <nav className={styles.nav}>
-        <Link to="/login" className={`${styles.administrador} ${location.pathname === "/login" ? styles.active : ""}`}>
+        <Link
+          to="/login"
+          className={`${styles.administrador} ${
+            location.pathname === "/login" ? styles.active : ""
+          }`}
+        >
           <Profile />
           Administrador
         </Link>

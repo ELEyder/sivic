@@ -1,6 +1,6 @@
 .home {
   height: calc(100vh - 130px);
-  min-height: 600px;
+  min-height: 400px;
   display: flex;
   align-items: center;
   justify-content: center;

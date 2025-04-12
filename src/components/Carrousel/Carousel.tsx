@@ -1,10 +1,16 @@
 import { useState, useEffect } from "react";
 import styles from "./Carousel.module.css";
-const images = ["/b1.png", "/b2.png", "/b3.png"];
+import useImagenWeb from "../../hooks/useImagenWeb";
+import { Image } from "antd";
 
 const Carousel = () => {
   const [index, setIndex] = useState(0);
-
+  const { imagenesWeb } = useImagenWeb();
+  const images = [
+    import.meta.env.VITE_BACKEND_BASE_URL + imagenesWeb.carrusel1,
+    import.meta.env.VITE_BACKEND_BASE_URL + imagenesWeb.carrusel2,
+    import.meta.env.VITE_BACKEND_BASE_URL + imagenesWeb.carrusel3,
+  ];
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prevIndex) => (prevIndex + 1) % images.length);
@@ -19,11 +25,9 @@ const Carousel = () => {
         “JUNTOS CONTRA LA TB: VIGILANDO Y PROTEGIENDO LA SALUD DE NUESTRA
         COMUNIDAD”
       </h1>
-      <img
-        src={`./banners/${images[index]}`}
-        alt={`Slide ${index}`}
-        className={styles.banner}
-      />
+      <div className={styles.banner}>
+        <Image src={images[index]} preview={false} fallback="./loading.gif" />
+      </div>
     </div>
   );
 };

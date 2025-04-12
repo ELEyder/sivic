@@ -4,8 +4,39 @@ import CasesTable from "../../components/Tables/CasesTable";
 import ContactsTable from "../../components/Tables/ContactsTable";
 import styles from "./Admin.module.css";
 import SelectFile from "../../components/SelectFile/SelectFile";
+import { useState } from "react";
+import useImagenWeb from "../../hooks/useImagenWeb";
+import { Image } from "antd";
 
 const Admin = () => {
+  const { imagenesWeb, updateImagenesWeb } = useImagenWeb();
+  const [imagenes, setImagenes] = useState({
+    logo: null,
+    carrusel1: null,
+    carrusel2: null,
+    carrusel3: null,
+  });
+
+  const handleFileChange = (key: any, file: any) => {
+    setImagenes((prev) => ({ ...prev, [key]: file }));
+  };
+
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    Object.entries(imagenes).forEach(([key, file]) => {
+      if (file) formData.append(key, file);
+    });
+
+    try {
+      updateImagenesWeb(formData);
+      alert("Imágenes actualizadas correctamente");
+    } catch (err) {
+      alert("Error al subir imágenes");
+      console.error(err);
+    }
+  };
   return (
     <>
       <section className={styles.graphs}>
@@ -21,13 +52,19 @@ const Admin = () => {
         <h2>Datos ingresados al formulario de contáctanos</h2>
         <ContactsTable />
       </section>
-      <section className={styles.adminPage}>
+      <form className={styles.adminPage} onSubmit={handleSubmit}>
         <h1>Administrar web</h1>
         <div className={styles.adminLogo}>
           <h2>Logo de la web</h2>
           <div className={styles.logoConfig}>
-            <img src="./logo.png" alt="logo" />
-            <SelectFile />
+            <Image
+              src={`${
+                import.meta.env.VITE_BACKEND_BASE_URL + imagenesWeb.logo
+              }`}
+              alt="logo"
+              fallback="./loading.gif"
+            />
+            <SelectFile name="logo" onFileChange={handleFileChange} />
             <p>(80 x 180 px)</p>
           </div>
         </div>
@@ -36,20 +73,45 @@ const Admin = () => {
           <h2>Carrusel</h2>
           <div className={styles.carrousel}>
             <div className={styles.carrouselContainer}>
-              <img src="./banners/b1.png" alt="logo" /> <SelectFile />
+              <Image
+                src={
+                  import.meta.env.VITE_BACKEND_BASE_URL + imagenesWeb.carrusel1
+                }
+                alt="logo"
+                fallback="./loading.gif"
+                width={"290px"}
+              />
+              <SelectFile name="carrusel1" onFileChange={handleFileChange} />
               <p>(1170 x 2880 px)</p>
             </div>
             <div className={styles.carrouselContainer}>
-              <img src="./banners/b2.png" alt="logo" /> <SelectFile />
+              <Image
+                src={
+                  import.meta.env.VITE_BACKEND_BASE_URL + imagenesWeb.carrusel2
+                }
+                alt="logo"
+                fallback="./loading.gif"
+                width={"290px"}
+              />
+              <SelectFile name="carrusel2" onFileChange={handleFileChange} />
               <p>(1170 x 2880 px)</p>
             </div>
             <div className={styles.carrouselContainer}>
-              <img src="./banners/b3.png" alt="logo" /> <SelectFile />
+              <Image
+                src={
+                  import.meta.env.VITE_BACKEND_BASE_URL + imagenesWeb.carrusel3
+                }
+                alt="logo"
+                fallback="./loading.gif"
+                width={"290px"}
+              />
+              <SelectFile name="carrusel3" onFileChange={handleFileChange} />
               <p>(1170 x 2880 px)</p>
             </div>
           </div>
         </div>
-      </section>
+        <Button>Guardar Imagenes</Button>
+      </form>
       <section className={styles.sections}>
         <Link to={"/admin/home"}>
           <Button>Inicio</Button>
