@@ -18,19 +18,18 @@ const Admin = () => {
     carrusel3: null,
   });
 
-  const handleFileChange = (key: any, file: any) => {
+  const handleFileChange = async (key: any, file: any) => {
     console.log(key);
     console.log(file);
     setImagenes((prev) => ({ ...prev, [key]: file }));
-  };
-
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
 
     const formData = new FormData();
-    Object.entries(imagenes).forEach(([key, file]) => {
-      if (file) formData.append(key, file);
+
+    Object.entries(imagenes).forEach(([k, f]) => {
+      if (f) formData.append(k, f);
     });
+
+    formData.append(key, file);
 
     try {
       formData.append("_method", "PUT");
@@ -41,6 +40,25 @@ const Admin = () => {
       console.error(err);
     }
   };
+
+  // const handleSubmit = async (e: any) => {
+
+  //   if (e != null) e.preventDefault();
+
+  //   const formData = new FormData();
+  //   Object.entries(imagenes).forEach(([key, file]) => {
+  //     if (file) formData.append(key, file);
+  //   });
+
+  //   try {
+  //     formData.append("_method", "PUT");
+  //     await updateImagenesWeb(formData);
+  //     setUrls(Date.now());
+  //   } catch (err) {
+  //     alert("Error al subir imágenes");
+  //     console.error(err);
+  //   }
+  // };
 
   return (
     <>
@@ -59,7 +77,7 @@ const Admin = () => {
       </section>
       <form
         className={styles.adminPage}
-        onSubmit={handleSubmit}
+        // onSubmit={handleSubmit}
         encType="multipart/form-data"
       >
         <h1>Administrar web</h1>
@@ -124,7 +142,7 @@ const Admin = () => {
             </div>
           </div>
         </div>
-        <Button>Guardar Imagenes</Button>
+        {/* <Button>Guardar Imagenes</Button> */}
       </form>
       <section className={styles.sections}>
         <Link to={"/admin/home"}>
