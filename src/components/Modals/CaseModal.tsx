@@ -28,6 +28,7 @@ const CaseModal: React.FC<CaseModalProps> = ({ caso, open, setOpen }) => {
 
   const onSubmit = async (e: any) => {
     e.preventDefault();
+    console.log(e.target)
     const formData = new FormData(e.target as HTMLFormElement);
     formData.append("_method", "PUT");
     await updateCaso(caso.id, formData);

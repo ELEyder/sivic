@@ -62,7 +62,7 @@ const useCaso = () => {
     fetch();
   }, []);
 
-  return { casos, loading, error, getCasos, createCaso, updateCaso, getCasosByDni };
+  return { casos, loading, error, getCasos, setCasos, createCaso, updateCaso, getCasosByDni };
 };
 
 export default useCaso;

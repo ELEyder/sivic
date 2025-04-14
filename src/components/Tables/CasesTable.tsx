@@ -144,12 +144,14 @@ const CasesTable = ({ filtred = "", mode = "admin" }: any) => {
       dataIndex: "asignado",
       key: "asignado",
       align: "center" as const,
+      render: (text : string) => text ?? "—",
     },
     {
       title: "RESOLUCIÓN",
       dataIndex: "resolucion",
       key: "resolucion",
       align: "center" as const,
+      render: (text : string) => text ?? "—",
     },
     {
       title: "DETALLES",

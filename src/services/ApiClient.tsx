@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, InternalAxiosRequestConfig } from "axios";
+import axios, { AxiosInstance } from "axios";
 
 interface ApiClientConfig {
   contentType?: string;

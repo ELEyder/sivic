@@ -358,7 +358,7 @@ const Register = () => {
                   <input
                     type="radio"
                     name="autorizacion_comunicacion"
-                    value="2"
+                    value="0"
                     required
                   />
                 </div>
@@ -386,7 +386,7 @@ const Register = () => {
                   <input
                     type="radio"
                     name="autorizacion_copia_reporte"
-                    value="2"
+                    value="0"
                     required
                   />
                 </div>

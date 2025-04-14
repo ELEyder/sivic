@@ -70,7 +70,9 @@ const columns = [
     align: "center" as "center",
     render: (text : String) => (
       <button style={{ background: "none", border: "none", cursor: "pointer" }} onClick={()=> {
-        console.log(text || "No hay resolición subida")
+        if (!text) return alert("No hay resolición subida");
+        const url = import.meta.env.VITE_BACKEND_BASE_URL + text
+        open(url)
       }}>
         <Docs />
       </button>
@@ -79,7 +81,7 @@ const columns = [
 ];
 
 const ConsultModal = ({ open, setOpen, dni }: any) => {
-  const { casos, getCasos, loading } = useCaso();
+  const { casos, getCasos, loading, setCasos } = useCaso();
 
   useEffect(() => {
     fetchCasos();
@@ -87,6 +89,7 @@ const ConsultModal = ({ open, setOpen, dni }: any) => {
 
   useEffect(() => {
     if (open) fetchCasos();
+    else setCasos([]);
   }, [open]);
 
   const fetchCasos = async () => {
