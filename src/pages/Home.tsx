@@ -1,6 +1,9 @@
 import Carousel from "../components/Carrousel/Carousel";
+import useHomePage from "../hooks/useHomePage";
 import styles from "./Home.module.css";
 const Home = () => {
+  const { homePage } = useHomePage();
+
   return (
     <>
       <section className={styles.home}>
@@ -8,28 +11,19 @@ const Home = () => {
       </section>
       <section className={styles.welcome}>
         <div className={styles.container}>
-          <h2>Bienvenidos a SIVIC TB</h2>
+          <h2>{homePage.welcome_title}</h2>
           <p>
-            Una plataforma para la comunicación y atención de casos relacionados
-            al estigma y discriminación de las personas afectadas por TB, así
-            como a la atención en TB y canasta PANTB
+           {homePage.welcome_text}
           </p>
         </div>
       </section>
       <section className={styles.about}>
         <div className={styles.aboutContainer}>
-          <h1 className={styles.titleAbout}>Nosotros</h1>
+          <h1 className={styles.titleAbout}>{homePage.title}</h1>
           <div className={styles.aboutDescription}>
-            <h2>¿Qué es el SIVIC - TB?</h2>
+            <h2>{homePage.subtitle}</h2>
             <p>
-              SIVIC - TB es una herramienta de monitoreo comunitario y ciudadano
-              enfocada en la tuberculosis, que facilita la implementación de
-              acciones de vigilancia en derechos humanos, con un énfasis en el
-              estigma y la discriminación, así como en el tratamiento de la
-              tuberculosis y la provisión de la canasta PANTB. Este sistema se
-              fundamenta en la participación activa de la comunidad para
-              detectar, seguir y abordar los problemas y obstáculos que
-              enfrentan las personas afectadas por la tuberculosis.
+              {homePage.description}
             </p>
           </div>
         </div>

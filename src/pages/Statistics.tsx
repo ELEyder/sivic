@@ -1,27 +1,43 @@
 import Carousel from "../components/Carrousel/Carousel";
+import CasosPorEstado from "../components/Dashboard/CasosPorEstado";
+import CasosRegistrados from "../components/Dashboard/CasosRegistrados";
+import TotalCasos from "../components/Dashboard/TotalCasos";
+import useDashboard from "../hooks/useDashboard";
+import useStatisticsPage from "../hooks/useStatisticsPage";
 import styles from "./Statistics.module.css";
+import moment from "moment";
 
 const Statistics = () => {
+  const { statisticsPage } = useStatisticsPage();
+  const { data, loading } = useDashboard();
+
   return (
     <>
       <section className={styles.home}>
         <Carousel></Carousel>
       </section>
       <section className={styles.stats}>
-        <h1>Estadísticas</h1>
-        <p>
-          Lorem ipsum dolor sit amet consectetur. Faucibus varius nunc varius
-          condimentum nunc consectetur duis ipsum. Duis libero sit porttitor
-          arcu in adipiscing. At lorem sed id dolor nisl erat urna. Ac magna
-          ullamcorper sagittis euismod rhoncus eget. Ornare amet ut id risus
-          ante. Scelerisque non lectus fames velit elit. Porta.
-        </p>
+        <h1>{statisticsPage.title}</h1>
+        <p>{statisticsPage.description}</p>
         <div className={styles.graphs}>
-          <div className={styles.graph}>Grafico 1</div>
-          <div className={styles.graph}>Grafico 2</div>
-          <div className={styles.graph}>Grafico 3</div>
+          <div className={styles.graph}>
+            <CasosRegistrados />
+          </div>
+          <div className={styles.graph}>
+            <CasosPorEstado />
+          </div>
+          <div className={styles.graph}>
+            <TotalCasos />
+          </div>
         </div>
-        <h2>Reporte actualizado al 28 de febrero del 2025</h2>
+        {!loading ? (
+          <h2>
+            Reporte actualizado al{" "}
+            {moment(data.ultima_actualizacion)
+              .locale("es")
+              .format("D [de] MMMM [del] YYYY")}
+          </h2>
+        ) : null}
       </section>
     </>
   );

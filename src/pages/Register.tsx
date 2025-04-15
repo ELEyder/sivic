@@ -34,7 +34,7 @@ const Register = () => {
     setNacionalidad(e.target.value);
   };
 
-  const onSubmit = (e: any) => {
+  const onSubmit = async (e: any) => {
     e.preventDefault();
     if (!captchaValue) {
       alert("Por favor, completa el captcha.");
@@ -43,9 +43,8 @@ const Register = () => {
     const formData = new FormData(e.target);
     const data = Object.fromEntries(formData.entries());
     data.lugar_caso = `${data.lugar_caso} - "${data.nombre_lugar_caso}"`;
-    createCaso(data);
+    await createCaso(data);
     setOpenModal(true);
-    console.log(data);
   };
 
   return (
