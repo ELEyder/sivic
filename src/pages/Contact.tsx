@@ -4,11 +4,9 @@ import styles from "./Contact.module.css";
 import Button from "../components/Buttons/Button";
 import useContacto from "../hooks/useContacto";
 import { Contacto } from "../interfaces/Contacto";
-import ConfirmModal from "../components/Modals/ConfirmModal";
 
 const Contact: React.FC = () => {
   const { createContacto } = useContacto();
-  const [openModal, setOpenModal] = useState(false);
   const [formData, setFormData] = useState<Contacto>({
     nombre_completo: "",
     correo: "",
@@ -39,8 +37,7 @@ const Contact: React.FC = () => {
       alert("Por favor, verifica el CAPTCHA");
       return;
     }
-
-    setOpenModal(true)
+    alert("Datos enviados correctamente")
     createContacto(formData);
 
     console.log(formData);
@@ -128,7 +125,6 @@ const Contact: React.FC = () => {
           </div>
         </div>
       </div>
-      <ConfirmModal open={openModal} setOpen={setOpenModal}/>
     </>
   );
 };

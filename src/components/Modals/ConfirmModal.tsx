@@ -4,14 +4,14 @@ import Check from "../Icons/Check";
 import DefaultModal from "./DefaultModal";
 import styles from "./ConfirmModal.module.css";
 
-const ConfirmModal = ({ openModal, setOpenModal }: any) => {
+const ConfirmModal = ({ openModal, setOpenModal, message = "Cambios aplicados correctamente"}: any) => {
   const navigate = useNavigate();
 
   return (
     <DefaultModal open={openModal} setOpen={setOpenModal} width={"628px"}>
       <div className={styles.modalContainer}>
         <Check />
-        <h1>Cambios aplicados correctamente</h1>
+        <h1>{message}</h1>
         <div className={styles.modalFooter}>
           <ButtonModal type={"secondary"} onClick={() => setOpenModal(false)}>
             Cerrar

@@ -75,8 +75,9 @@ const ChatBot: React.FC = () => {
     {
       message: "Por favor, haz click aquí para ir al formulario de preguntas.",
       onClick: () => {
-        resetChat()
-        navigate("/contact")
+        setIsOpenChat(false);
+        resetChat();
+        navigate("/contact");
       },
     },
   ];
@@ -108,6 +109,7 @@ const ChatBot: React.FC = () => {
     setMessages([newMessages, answers[index]]);
 
     setViewReturn("block");
+
   };
 
   const resetChat = () => {
@@ -124,7 +126,7 @@ const ChatBot: React.FC = () => {
 
   return (
     <>
-      <div className={styles.chatbot}>
+      <div className={styles.chatbot} style={{ display: isOpenChat ? "flex" : "none" }}>
         <div className={styles.header}>
           <p>SIVIC Bot</p>
           <button className={styles.exitButton}>
