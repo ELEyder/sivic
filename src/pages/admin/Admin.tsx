@@ -7,6 +7,9 @@ import SelectFile from "../../components/SelectFile/SelectFile";
 import { useState } from "react";
 import useImagenWeb from "../../hooks/useImagenWeb";
 import { Image } from "antd";
+import CasosRegistrados from "../../components/Dashboard/CasosRegistrados";
+import CasosPorEstado from "../../components/Dashboard/CasosPorEstado";
+import TotalCasos from "../../components/Dashboard/TotalCasos";
 
 const Admin = () => {
   const { updateImagenesWeb } = useImagenWeb();
@@ -63,9 +66,15 @@ const Admin = () => {
   return (
     <>
       <section className={styles.graphs}>
-        <div className={styles.graph}>Gráfico 1</div>
-        <div className={styles.graph}>Gráfico 2</div>
-        <div className={styles.graph}>Gráfico 3</div>
+        <div className={styles.graph}>
+          <CasosRegistrados />
+        </div>
+        <div className={styles.graph}>
+          <CasosPorEstado />
+        </div>
+        <div className={styles.graph}>
+          <TotalCasos />
+        </div>
       </section>
       <section className={styles.cases}>
         <h2>LISTADO DE DATOS DE CASOS</h2>
@@ -87,7 +96,8 @@ const Admin = () => {
             <Image
               src={`${
                 import.meta.env.VITE_BACKEND_BASE_URL +
-                "/storage/imagenes_web/logo.png?" + urls
+                "/storage/imagenes_web/logo.png?" +
+                urls
               }`}
               alt="logo"
               height={100}
@@ -105,7 +115,8 @@ const Admin = () => {
               <Image
                 src={
                   import.meta.env.VITE_BACKEND_BASE_URL +
-                  "/storage/imagenes_web/carrusel1.png?" + urls
+                  "/storage/imagenes_web/carrusel1.png?" +
+                  urls
                 }
                 alt="logo"
                 fallback="./loading.gif"
@@ -118,7 +129,8 @@ const Admin = () => {
               <Image
                 src={
                   import.meta.env.VITE_BACKEND_BASE_URL +
-                  "/storage/imagenes_web/carrusel2.png?" + urls
+                  "/storage/imagenes_web/carrusel2.png?" +
+                  urls
                 }
                 alt="logo"
                 fallback="./loading.gif"
@@ -131,7 +143,8 @@ const Admin = () => {
               <Image
                 src={
                   import.meta.env.VITE_BACKEND_BASE_URL +
-                  "/storage/imagenes_web/carrusel3.png?" + urls
+                  "/storage/imagenes_web/carrusel3.png?" +
+                  urls
                 }
                 alt="logo"
                 fallback="./loading.gif"
