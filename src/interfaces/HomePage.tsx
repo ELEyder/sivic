@@ -7,4 +7,5 @@ export interface HomePage {
   description: string;
   created_at?: string;
   updated_at?: string;
+  _method? : string;
 }

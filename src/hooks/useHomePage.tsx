@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ApiClient, ApiClientFiles } from "../services/ApiClient";
+import { ApiClient } from "../services/ApiClient";
 import { HomePage } from "../interfaces/HomePage";
 
 const useHomePage = () => {
@@ -19,11 +19,10 @@ const useHomePage = () => {
     }
   };
 
-  const updateHomePage = async (id:number, data : FormData) => {
+  const updateHomePage = async ( data : any) => {
     setLoading(true);
     try {
-      const response = await ApiClientFiles.post(`/home-page/${id}`, data);
-      setHomePage(response.data);
+      await ApiClient.post(`home-page`, data);
     } catch (error: any) {
       setError(error);
     } finally {

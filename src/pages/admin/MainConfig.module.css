@@ -13,7 +13,7 @@
 }
 
 .container {
-  width: 956px;
+  min-width: 956px;
   background-color: #D9D9D9;
   padding: 30px 40px;
   display: flex;
