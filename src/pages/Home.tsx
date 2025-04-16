@@ -29,23 +29,22 @@ const Home = () => {
         </div>
       </section>
       <section className={styles.info}>
-        <h1>Información</h1>
-        <h2>FLUJO DE DENUNCIA</h2>
+        <h1>FLUJO DE DENUNCIA</h1>
         <div className={styles.steps}>
           <div className={styles.step1}>
             <p>Usuario TB reporta a la plataforma</p>
           </div>
           <div>
-            <img src="./arrow1.png" alt="arrow" />
+            <img src="./arrow1.png" alt="arrow" className={styles.arrow}/>
           </div>
           <div className={styles.step2}>
             <p>
               Administrador de la plataforma levanta información y deriva para
-              resolución a OAT, según región de intervención.{" "}
+              resolución a OAT, según región de intervención.
             </p>
           </div>
           <div>
-            <img src="./arrow2.png" alt="arrow" />
+            <img src="./arrow2.png" alt="arrow" className={styles.arrow}/>
           </div>
           <div className={styles.step3}>
             <p>

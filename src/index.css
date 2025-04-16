@@ -2,15 +2,19 @@
   --color1: #F77F00;
   --color2: #0071F2;
   --text: #353535;
+  --font-base: 16px;
+}
+
+html {
+  font-size: var(--font-base); /* para usar rem */
 }
 
 * {
   margin: 0;
   padding: 0;
-  font-family: "Poppins";
-  letter-spacing: normal;
+  font-family: "Poppins", sans-serif;
   letter-spacing: -0.5px;
-  font-size: 18px;
+  font-size: 1rem; /* = 16px base */
   box-sizing: border-box;
 }
 
@@ -19,30 +23,79 @@ a {
   color: var(--text);
 }
 
-h1{
-  color : var(--color1);
+h1 {
+  color: var(--color1);
   font-weight: 600;
-  font-size: 48px;
+  font-size: 3rem; /* 48px */
 }
 
-h2{
-  font-size: 36px;
+h2 {
+  font-size: 2.25rem; /* 36px */
 }
 
-h3{
+h3 {
   font-weight: bold;
+  font-size: 1.5rem;
 }
 
-p {
-  font-weight: 400;
-}
-
+p,
 li {
   font-weight: 400;
+  font-size: 1rem;
 }
 
 textarea {
   width: 100%;
   resize: vertical;
-  padding: 8px;
+  padding: 0.5rem;
+}
+
+/* =======================
+   Media Queries
+========================== */
+
+@media (max-width: 1200px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 15px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 1.75rem;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+  }
+
+  h3 {
+    font-size: 1.125rem;
+  }
 }
