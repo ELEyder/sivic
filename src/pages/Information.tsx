@@ -3,6 +3,7 @@ import Button from "../components/Buttons/Button";
 import Carousel from "../components/Carrousel/Carousel";
 import useInformationPage from "../hooks/useInformationPage";
 import styles from "./Information.module.css";
+import { useNavigate } from "react-router-dom";
 
 // Función para renderizar saltos de línea
 function formatTextWithBreaks(text?: string) {
@@ -17,6 +18,12 @@ function formatTextWithBreaks(text?: string) {
 
 const Information: React.FC = () => {
   const { informationPage } = useInformationPage();
+  const navigate = useNavigate()
+  const images = [
+    import.meta.env.VITE_BACKEND_BASE_URL + "/storage/information/image1.png",
+    import.meta.env.VITE_BACKEND_BASE_URL + "/storage/information/image2.png",
+    import.meta.env.VITE_BACKEND_BASE_URL + "/storage/information/image3.png",
+  ];
   if (!informationPage) {
     return <div>Cargando información...</div>;
   }
@@ -44,14 +51,14 @@ const Information: React.FC = () => {
               <p>{formatTextWithBreaks(informationPage.description_3)}</p>
             </div>
           </div>
-          <img src={"./info/3.png"} alt="Imagen 1" />
+          <img src={images[0]} alt="Imagen 1" />
         </div>
       </section>
 
       <section className={styles.infoDark}>
         <h1>{informationPage.subtitle_4}</h1>
         <div className={styles.infoDarkContainer}>
-          <img src={"./info/3.png"} alt="Imagen 2" />
+          <img src={images[1]} alt="Imagen 2" />
           <div className={styles.infoDarkText}>
             <p>{formatTextWithBreaks(informationPage.description_4)}</p>
           </div>
@@ -68,12 +75,12 @@ const Information: React.FC = () => {
           </div>
           <div className={styles.tbMedia}>
             <div className={styles.imgContainer}>
-              <img src={"./info/3.png"} alt="Imagen 3" />
+              <img src={images[2]} alt="Imagen 3" />
             </div>
             <h3>{informationPage.subtitle_7}</h3>
             <p>{formatTextWithBreaks(informationPage.description_7)}</p>
             <div className={styles.btnContainer}>
-              <Button>Quiero registrar un caso</Button>
+              <Button onClick={()=> navigate("/register")}>Quiero registrar un caso</Button>
             </div>
           </div>
         </div>

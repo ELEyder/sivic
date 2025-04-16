@@ -4,11 +4,17 @@ interface SelectFileProps {
   name?: string;
   accept?: string;
   onFileChange?: (key: string, file: File) => void;
+  disabled?: boolean;
 }
 
-const SelectFile = ({ name = '', accept= "image/*", onFileChange = () => {} }: SelectFileProps) => {
+const SelectFile = ({
+  name = "",
+  accept = "image/*",
+  onFileChange = () => {},
+  disabled = false,
+}: SelectFileProps) => {
   return (
-    <div className={styles.customFile}>
+    <div className={`${styles.customFile} ${disabled ? styles.disabled : ''}`}>
       <label htmlFor={name}>Seleccione un archivo</label>
       <input
         type="file"
@@ -19,9 +25,10 @@ const SelectFile = ({ name = '', accept= "image/*", onFileChange = () => {} }: S
           const file = e.target.files?.[0];
           if (file) {
             console.log("Archivo seleccionado:", name);
-            onFileChange(name, file)
+            onFileChange(name, file);
           }
         }}
+        disabled={disabled}
       />
       <span className={styles.fileIcon}>📄</span>
     </div>

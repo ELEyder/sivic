@@ -2,12 +2,10 @@ import { Link, useLocation } from "react-router-dom";
 import styles from "./Header.module.css";
 import Button from "../Buttons/Button";
 import Profile from "../Icons/Profile";
-import useImagenWeb from "../../hooks/useImagenWeb";
 import { Image } from "antd";
 
 const Header = () => {
   const location = useLocation();
-  const { imagenesWeb } = useImagenWeb();
 
   return (
     <header className={styles.header}>
@@ -16,7 +14,7 @@ const Header = () => {
           <div className={styles.logo}>
             <Image
               src={
-                import.meta.env.VITE_BACKEND_BASE_URL + imagenesWeb.logo 
+                import.meta.env.VITE_BACKEND_BASE_URL + "/storage/imagenes_web/logo.png"
               }
               height={"50px"}
               preview={false}

@@ -12,7 +12,7 @@ import CasosPorEstado from "../../components/Dashboard/CasosPorEstado";
 import TotalCasos from "../../components/Dashboard/TotalCasos";
 
 const Admin = () => {
-  const { updateImagenesWeb } = useImagenWeb();
+  const { updateImagenesWeb, loading } = useImagenWeb();
   const [urls, setUrls] = useState(Date.now());
   const [imagenes, setImagenes] = useState({
     logo: null,
@@ -103,7 +103,7 @@ const Admin = () => {
               height={100}
               fallback="./loading.gif"
             />
-            <SelectFile name="logo" onFileChange={handleFileChange} />
+            <SelectFile name="logo" onFileChange={handleFileChange} disabled={loading}/>
             <p>(80 x 180 px)</p>
           </div>
         </div>
@@ -122,7 +122,7 @@ const Admin = () => {
                 fallback="./loading.gif"
                 height={200}
               />
-              <SelectFile name="carrusel1" onFileChange={handleFileChange} />
+              <SelectFile name="carrusel1" onFileChange={handleFileChange} disabled={loading}/>
               <p>(1170 x 2880 px)</p>
             </div>
             <div className={styles.carrouselContainer}>
@@ -136,7 +136,7 @@ const Admin = () => {
                 fallback="./loading.gif"
                 height={200}
               />
-              <SelectFile name="carrusel2" onFileChange={handleFileChange} />
+              <SelectFile name="carrusel2" onFileChange={handleFileChange} disabled={loading}/>
               <p>(1170 x 2880 px)</p>
             </div>
             <div className={styles.carrouselContainer}>
@@ -150,7 +150,7 @@ const Admin = () => {
                 fallback="./loading.gif"
                 height={200}
               />
-              <SelectFile name="carrusel3" onFileChange={handleFileChange} />
+              <SelectFile name="carrusel3" onFileChange={handleFileChange} disabled={loading}/>
               <p>(1170 x 2880 px)</p>
             </div>
           </div>

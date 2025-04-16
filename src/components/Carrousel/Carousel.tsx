@@ -1,15 +1,13 @@
 import { useState, useEffect } from "react";
 import styles from "./Carousel.module.css";
-import useImagenWeb from "../../hooks/useImagenWeb";
 import { Image } from "antd";
 
 const Carousel = () => {
   const [index, setIndex] = useState(0);
-  const { imagenesWeb } = useImagenWeb();
   const images = [
-    import.meta.env.VITE_BACKEND_BASE_URL + imagenesWeb.carrusel1,
-    import.meta.env.VITE_BACKEND_BASE_URL + imagenesWeb.carrusel2,
-    import.meta.env.VITE_BACKEND_BASE_URL + imagenesWeb.carrusel3,
+    import.meta.env.VITE_BACKEND_BASE_URL + "/storage/imagenes_web/carrusel1.png",
+    import.meta.env.VITE_BACKEND_BASE_URL + "/storage/imagenes_web/carrusel2.png",
+    import.meta.env.VITE_BACKEND_BASE_URL + "/storage/imagenes_web/carrusel3.png",
   ];
   useEffect(() => {
     const interval = setInterval(() => {

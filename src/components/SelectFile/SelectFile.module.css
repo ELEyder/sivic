@@ -5,10 +5,17 @@
   padding: 5px;
   border-radius: 5px;
   width: fit-content;
+  opacity: 1;
+  transition: opacity 0.2s;
+}
+
+.customFile.disabled {
+  opacity: 0.5; /* Apaga visualmente */
+  pointer-events: none; /* Previene interacción */
 }
 
 .customFile input {
-  display: none; /* Oculta el input nativo */
+  display: none;
 }
 
 .customFile label {

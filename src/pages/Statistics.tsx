@@ -33,9 +33,11 @@ const Statistics = () => {
         {!loading ? (
           <h2>
             Reporte actualizado al{" "}
-            {moment(data.ultima_actualizacion)
-              .locale("es")
-              .format("D [de] MMMM [del] YYYY")}
+            {moment(data.ultima_actualizacion).isValid()
+              ? moment(data.ultima_actualizacion)
+                  .locale("es")
+                  .format("D [de] MMMM [del] YYYY")
+              : moment().locale("es").format("D [de] MMMM [del] YYYY")}
           </h2>
         ) : null}
       </section>
