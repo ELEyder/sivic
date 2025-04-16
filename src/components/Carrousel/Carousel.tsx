@@ -24,7 +24,7 @@ const Carousel = () => {
         COMUNIDAD”
       </h1>
       <div className={styles.banner}>
-        <Image src={images[index]} preview={false} fallback="./loading.gif" />
+        <Image height={"100%"} width={"100%"} src={images[index]} preview={false} fallback="./loading.gif" />
       </div>
     </div>
   );

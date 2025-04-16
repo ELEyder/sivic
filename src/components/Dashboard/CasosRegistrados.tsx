@@ -8,8 +8,7 @@ export default function CasosRegistrados() {
   const { data } = useDashboard();
   const ultimos6Meses = data.grafico_mensual;
 
-  // Verificamos si ultimos6Meses tiene datos
-  if (ultimos6Meses.length === 0) {
+  if (!ultimos6Meses || ultimos6Meses.length === 0) {
     return (
       <div>
         <h2>Casos registrados</h2>
@@ -23,9 +22,14 @@ export default function CasosRegistrados() {
       <h2>Casos registrados</h2>
       <ResponsiveContainer width="100%" height={200}>
         <BarChart data={ultimos6Meses}>
-          <XAxis dataKey="mes" />
+          {/* 👇 Mostrar solo la inicial del mes en el eje X */}
+          <XAxis dataKey="mes" tickFormatter={(mes) => mes.charAt(0)} />
+
           <YAxis hide />
-          <Tooltip />
+          <Tooltip
+            formatter={(value) => [`${value} casos`, 'Casos']}
+            labelFormatter={(label) => label} // mes completo
+          />
           <Bar dataKey="casos" fill="#FBBF24" radius={[4, 4, 0, 0]} />
         </BarChart>
       </ResponsiveContainer>
