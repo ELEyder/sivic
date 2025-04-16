@@ -95,3 +95,15 @@ ul {
   justify-content: center;
 }
 
+
+@media (max-width: 1212px) {
+  .infoContainer {
+    flex-direction: column;
+  }
+  .infoDarkContainer {
+    flex-direction: column;
+  }
+  .tbContainer {
+    flex-direction: column;
+  }
+}
