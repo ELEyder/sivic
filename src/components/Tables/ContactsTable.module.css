@@ -21,14 +21,31 @@
   gap: 20px;
 }
 
+.search {
+  display: flex;
+  gap: 20px;
+}
 .input {
   width: 325px;
 }
 
 .rowLight td {
-  background-color: #E8E8E8; 
+  background-color: #e8e8e8;
 }
 
 .rowDark td {
   background-color: white;
+}
+
+@media (max-width: 900px) {
+  .filters {
+    flex-direction: column;
+    gap: 15px;
+    align-items: start;
+  }
+  .searchs {
+    justify-content: space-between;
+    width: 100%;
+    flex-wrap: wrap;
+  }
 }

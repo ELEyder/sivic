@@ -144,14 +144,14 @@ const CasesTable = ({ filtred = "", mode = "admin" }: any) => {
       dataIndex: "asignado",
       key: "asignado",
       align: "center" as const,
-      render: (text : string) => text ?? "—",
+      render: (text: string) => text ?? "—",
     },
     {
       title: "RESOLUCIÓN",
       dataIndex: "resolucion",
       key: "resolucion",
       align: "center" as const,
-      render: (text : string) => text ?? "—",
+      render: (text: string) => text ?? "—",
     },
     {
       title: "DETALLES",
@@ -190,14 +190,16 @@ const CasesTable = ({ filtred = "", mode = "admin" }: any) => {
             <Select.Option value={15}>15</Select.Option>
           </Select>
           <div className={styles.searchs}>
-            <label htmlFor="search">Buscar:</label>
-            <input
-              type="text"
-              className={styles.input}
-              value={searchTerm}
-              onChange={handleSearch}
-              placeholder="DNI, nombre, estado o asignado"
-            />
+            <div className={styles.search}>
+              <label htmlFor="search">Buscar:</label>
+              <input
+                type="text"
+                className={styles.input}
+                value={searchTerm}
+                onChange={handleSearch}
+                placeholder="DNI, nombre, estado o asignado"
+              />
+            </div>
             <RangePicker onChange={handleDateFilter} />
           </div>
         </div>
@@ -206,7 +208,7 @@ const CasesTable = ({ filtred = "", mode = "admin" }: any) => {
           columns={columns}
           dataSource={filteredData}
           rowKey={"id"}
-          scroll={{ x: "min-content" }}
+          scroll={{ x: "max-content" }}
           pagination={{ pageSize: page }}
           loading={loading}
           rowClassName={(_, index) =>

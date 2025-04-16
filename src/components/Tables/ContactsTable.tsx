@@ -132,14 +132,16 @@ const ContactsTable = () => {
             <Select.Option value={15}>15</Select.Option>
           </Select>
           <div className={styles.searchs}>
-            <label htmlFor="search">Buscar:</label>
-            <input
-              type="text"
-              className={styles.input}
-              value={searchTerm}
-              onChange={handleSearch} // Agregar evento onChange
-              placeholder="Buscar por DNI, nombre, correo o estado"
-            />
+            <div className={styles.search}>
+              <label htmlFor="search">Buscar:</label>
+              <input
+                type="text"
+                className={styles.input}
+                value={searchTerm}
+                onChange={handleSearch} // Agregar evento onChange
+                placeholder="Buscar por DNI, nombre, correo o estado"
+              />
+            </div>
             <RangePicker onChange={handleDateFilter} />
           </div>
         </div>
@@ -148,7 +150,7 @@ const ContactsTable = () => {
           columns={columns}
           dataSource={filteredData}
           rowKey="id"
-          scroll={{ x: "min-content" }}
+          scroll={{ x: "max-content" }}
           pagination={{ pageSize: page }}
           loading={loading}
           rowClassName={(_, index) =>

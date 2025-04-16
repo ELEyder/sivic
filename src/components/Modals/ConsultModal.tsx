@@ -102,12 +102,13 @@ const ConsultModal = ({ open, setOpen, dni }: any) => {
         style={{
           display: "flex",
           flexDirection: "column",
-          alignItems: "end",
+          alignItems: "center",
           gap: "10px",
         }}
       >
         <h3 style={{ width: "100%", textAlign: "center" }}>RESULTADOS</h3>
-        <Table columns={columns} dataSource={casos} pagination={false} rowKey={"id"} loading={loading}/>
+          
+          <Table columns={columns} dataSource={casos} pagination={false} rowKey={"id"} loading={loading} scroll={{ x: "max-content" }}/>
         <button
           style={{
             marginTop: "10px",
